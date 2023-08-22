@@ -29,3 +29,14 @@
 /home/thomas/Área de Trabalho/paroquiaRussas/obj/Debug/net7.0/paroquiaRussas.pdb
 /home/thomas/Área de Trabalho/paroquiaRussas/obj/Debug/net7.0/paroquiaRussas.genruntimeconfig.cache
 /home/thomas/Área de Trabalho/paroquiaRussas/obj/Debug/net7.0/ref/paroquiaRussas.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/Humanizer.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Design.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/Mono.TextTemplating.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/Npgsql.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/bin/Debug/net7.0/System.CodeDom.dll
+/home/thomas/Área de Trabalho/paroquiaRussas/obj/Debug/net7.0/paroquiaRussas.csproj.CopyComplete
