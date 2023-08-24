@@ -5,18 +5,14 @@ using System;
 
 namespace paroquiaRussas.Utility;
 public class AppDbContext : DbContext
-{
-    protected readonly IConfiguration Configuration;
+{   
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
-    public AppDbContext(IConfiguration configuration)
+    public DbSet<Users>? Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        Configuration = configuration;
+        base.OnModelCreating(builder);
+        BaseModel.Configure(builder);
     }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseNpgsql(Configuration.GetConnectionString("conn"));
-    }
-
-    public DbSet<User> User { get; set;}
 }
