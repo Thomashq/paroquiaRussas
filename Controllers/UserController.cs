@@ -38,13 +38,15 @@ public class UserController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> AddUser(Users user, Role role)
+    public async Task<IActionResult> AddUser(Users user)
     {
         try{           
             
-            if(role != Role.Admin)
-                BadRequest("Você não tem permissão para adicionar um usuário");
-
+            //if(role != Role.Admin)
+                //BadRequest("Você não tem permissão para adicionar um usuário");
+            
+            PasswordEncryption passwordEncryption = new PasswordEncryption(user.Pwd);
+            user.Pwd = passwordEncryption.Encrypt(user.Pwd);
             _appDbContext.Add(user);
             await _appDbContext.SaveChangesAsync();
             
