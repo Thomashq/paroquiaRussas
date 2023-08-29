@@ -25,8 +25,8 @@ public class PersonController : Controller
     }
 
     [HttpGet]
-    [Route("getbyid")]
-    public ActionResult<Person> GetpersonById(int personId)
+    [Route("getbyid/{id}")]
+    public ActionResult<Person> GetpersonById([FromRoute] long personId)
     {
         try
         {
@@ -61,7 +61,7 @@ public class PersonController : Controller
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Deleteperson(int personId)
+    public async Task<IActionResult> DeletePerson(int personId)
     {
         try
         {

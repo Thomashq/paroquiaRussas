@@ -17,7 +17,7 @@ namespace paroquiaRussas.Transactional
         }
 
         [HttpGet]
-        public ActionResult<Person> GetPersonById(int personId)
+        public ActionResult<Person> GetPersonById(long personId = 1)
         {
             try
             {
