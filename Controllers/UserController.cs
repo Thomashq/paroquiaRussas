@@ -1,3 +1,4 @@
+using System.Security.AccessControl;
 using Microsoft.AspNetCore.Mvc;
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
@@ -17,42 +18,47 @@ public class UserController : Controller
     }
 
     [HttpGet]
-    public List<Users> GetAllUsers(){
+    public List<Users> GetAllUsers()
+    {
         return _appDbContext.Users.ToList();
     }
 
     [HttpGet]
-    [Route("getbyid")] 
-    public Users GetUserById(int userId)
+    [Route("getbyid")]
+    public Users GetUserById(int usersId)
     {
         try
         {
-            Users user = _appDbContext.Users.FirstOrDefault(x => x.Id == userId);
-
-            return user != null ? user : null;
+            return _appDbContext.Users.FirstOrDefault(x => x.Id == usersId);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            throw ex;
+            throw new Exception("Erro ao recuperar usuário pelo Id.", ex);
         }
     }
-    
+
     [HttpPost]
-    public async Task<IActionResult> AddUser(Users user)
+    public async Task<IActionResult> AddUser(Users user, int role)
     {
-        try{           
-            
-            //if(role != Role.Admin)
-                //BadRequest("Você não tem permissão para adicionar um usuário");
-            
+        try
+        {
+            Role enumRole = Role.Writer;
+
+            if (System.Enum.IsDefined(typeof(Role), role))
+                enumRole = (Role)System.Enum.Parse(typeof(Role), role.ToString());
+
+            if (enumRole != Role.Admin)
+                BadRequest("Você não tem permissão para adicionar um usuário");
+
             PasswordEncryption passwordEncryption = new PasswordEncryption(user.Pwd);
             user.Pwd = passwordEncryption.Encrypt(user.Pwd);
+
             _appDbContext.Add(user);
             await _appDbContext.SaveChangesAsync();
-            
-            return Ok("Usuário adicionado com sucesso");           
+
+            return Ok("Usuário adicionado com sucesso");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw ex;
         }
@@ -63,16 +69,17 @@ public class UserController : Controller
     {
         try
         {
-            Users user = userId > 0 ? _appDbContext.Users.Find(userId) : throw new Exception();
+            Users user = userId > 0 ? _appDbContext.Users.FirstOrDefault(x => x.Id == userId) : throw new Exception();
 
-            if(user != null){
+            if (user != null)
+            {
                 _appDbContext.Users.Remove(user);
                 await _appDbContext.SaveChangesAsync();
             }
 
             return Ok("Usuário Deletado com Sucesso");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw ex;
         }

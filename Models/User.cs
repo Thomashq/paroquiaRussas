@@ -6,7 +6,7 @@ public class Users : BaseModel
 {
     public Role Role{ get; set; }
 
-    public string Login { get; set; }
+    public string Username { get; set; }
 
     public string Pwd { get; set; }
 }
