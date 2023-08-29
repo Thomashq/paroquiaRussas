@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using static paroquiaRussas.Utility.Enum;
 
 namespace paroquiaRussas.Models;
-public class Users : BaseModel
+public class Person : BaseModel
 {
     public Role Role{ get; set; }
 
