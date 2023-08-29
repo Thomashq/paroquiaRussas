@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "http": {
+    "Paróquia Russas http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "https": {
+    "Paróquia Russas https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
