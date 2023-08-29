@@ -1,22 +1,46 @@
-html {
-  font-size: 14px;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
+
+:root {
+    --primary-color: #9c4521;
+    --secundary-color: #ab6c29;
+    --footer-color: #4a5562;
+    --white-color: #fafbfc;
+    --gray-low-color: #f8f8f8;
+    --translucid: rgba(255, 255, 255, 0.805);
+    --hover-color: #ffdc9b;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/*SOBREPOSIÇÃO BOOTSTRAP*/
 body {
-  margin-bottom: 60px;
+    font-family: "Poppins", sans-serif;
+}
+
+.fw-bold {
+    font-weight: 500 !important;
+}
+
+.bg-secondary, .btn-secondary {
+    background-color: var(--secundary-color) !important;
+}
+
+.text-dark {
+    color: var(--primary-color) !important;
+}
+
+.min-height-96px{
+    min-height: 96px;
+}
+
+@media (min-width: 576px) {
+    .container-fluid {
+        width: 100vw !important;
+        display: flex !important;
+        justify-content: space-between !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .w-sm-100{
+        width: 100%
+    }
 }
