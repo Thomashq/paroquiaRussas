@@ -1,9 +1,6 @@
-using System.Reflection.Metadata;
-using paroquiaRussas.Transactional;
 using Microsoft.AspNetCore.Mvc;
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
-using static paroquiaRussas.Utility.Enum;
 
 namespace paroquiaRussas.Controllers
 {
@@ -25,16 +22,12 @@ namespace paroquiaRussas.Controllers
             return _appDbContext.Person.ToList();
         }
 
-        [HttpGet]
-        [Route("getbyid/{id}")]
-        public ActionResult<Person> GetpersonById([FromRoute] long personId)
+        [HttpGet("{id}")]
+        public ActionResult<Person> GetpersonById(long id)
         {
             try
             {
-                PersonTRA personTRA = new(_appDbContext);
-                var person = personTRA.GetPersonById(personId);
-
-                return person;
+                return _appDbContext.Person.FirstOrDefault(x => x.Id == id);
             }
             catch (Exception ex)
             {
