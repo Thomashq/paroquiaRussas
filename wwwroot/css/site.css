@@ -13,6 +13,7 @@
 /*SOBREPOSIÇÃO BOOTSTRAP*/
 body {
     font-family: "Poppins", sans-serif;
+    height: 100vh;
 }
 
 .fw-bold {
@@ -41,6 +42,10 @@ body {
 
 .footer-icons-div{
     margin-bottom: -25px !important;
+}
+
+.gap-top{
+    padding-top: 7rem;
 }
 
 @media (min-width: 576px) {
