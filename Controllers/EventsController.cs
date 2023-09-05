@@ -29,11 +29,11 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEvent(Event @event)
+        public async Task<IActionResult> AddEvent(Event eventToPost)
         {
             try
             {
-                _appDbContext.Add(@event);
+                _appDbContext.Add(eventToPost);
                 await _appDbContext.SaveChangesAsync();
 
                 return Ok("Evento adicionado com sucesso");
@@ -76,29 +76,29 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                Event @event = _appDbContext.Event.FirstOrDefault(x => x.Id == eventUpdate.Id);
+                Event eventToEdit = _appDbContext.Event.FirstOrDefault(x => x.Id == eventUpdate.Id);
 
-                if (@event == null)
+                if (eventToEdit == null)
                     return NotFound(); // Retorna 404 caso o evento não seja encontrado
 
                 if (eventUpdate.EventDate != null)
-                    @event.EventDate = eventUpdate.EventDate;
+                    eventToEdit.EventDate = eventUpdate.EventDate;
 
                 if (!string.IsNullOrEmpty(eventUpdate.EventDescription))
-                    @event.EventDescription = eventUpdate.EventDescription;
+                    eventToEdit.EventDescription = eventUpdate.EventDescription;
 
                 if (!string.IsNullOrEmpty(eventUpdate.EventImage))
-                    @event.EventImage = eventUpdate.EventImage;
+                    eventToEdit.EventImage = eventUpdate.EventImage;
 
                 if (!string.IsNullOrEmpty(eventUpdate.EventName))
-                    @event.EventName = eventUpdate.EventName;
+                    eventToEdit.EventName = eventUpdate.EventName;
 
-                @event.UpdateDate = DateOnly.FromDateTime(DateTime.Now);
+                eventToEdit.UpdateDate = DateOnly.FromDateTime(DateTime.Now);
 
-                _appDbContext.Event.Update(@event);
+                _appDbContext.Event.Update(eventToEdit);
                 _appDbContext.SaveChanges();
 
-                return Ok(@event);
+                return Ok(eventToEdit);
             }
             catch (Exception ex)
             {
@@ -111,12 +111,12 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                Event @event = await _appDbContext.Event.FirstOrDefaultAsync(x => x.Id == id);
+                Event eventToDelete = await _appDbContext.Event.FirstOrDefaultAsync(x => x.Id == id);
 
-                if (@event == null)
+                if (eventToDelete == null)
                     return NotFound();
 
-                _appDbContext.Event.Remove(@event);
+                _appDbContext.Event.Remove(eventToDelete);
 
                 await _appDbContext.SaveChangesAsync();
 
