@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
 
 namespace paroquiaRussas.Controllers
 {
-
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("api/admin")]
     public class PersonController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -50,16 +50,16 @@ namespace paroquiaRussas.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Erro ao adicionar usuário", ex);
             }
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeletePerson(int personId)
+        public async Task<IActionResult> DeletePerson(long id)
         {
             try
             {
-                Person person = personId > 0 ? _appDbContext.Person.FirstOrDefault(x => x.Id == personId) : throw new Exception();
+                Person person = _appDbContext.Person.FirstOrDefault(x => x.Id == id);
 
                 if (person != null)
                 {
@@ -74,5 +74,6 @@ namespace paroquiaRussas.Controllers
                 throw ex;
             }
         }
+
     }
 }
