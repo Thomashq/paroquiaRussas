@@ -54,18 +54,19 @@ namespace paroquiaRussas.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePerson(long id)
         {
             try
             {
                 Person person = _appDbContext.Person.FirstOrDefault(x => x.Id == id);
 
-                if (person != null)
-                {
-                    _appDbContext.Person.Remove(person);
-                    await _appDbContext.SaveChangesAsync();
-                }
+                if (person == null)
+                    return NotFound();
+                                
+                _appDbContext.Person.Remove(person);
+                
+                await _appDbContext.SaveChangesAsync();
 
                 return Ok("Usuário Deletado com Sucesso");
             }
