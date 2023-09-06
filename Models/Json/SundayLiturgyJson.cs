@@ -1,6 +1,6 @@
 ﻿namespace paroquiaRussas.Models.Json
 {
-    public class LiturgyJson
+    public class SundayLiturgyJson
     {
         public string data { get; set; }
         public string liturgia { get; set; }

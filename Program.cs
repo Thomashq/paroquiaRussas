@@ -16,7 +16,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("conn"));
 });
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,13 +41,4 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}");
 
-var liturgy = new LiturgyApiConfig();
-
-app.Configuration.GetSection("LiturgyApiConfig").Bind(liturgy);
-
 app.Run();
-
-public class LiturgyApiConfig
-{
-    public string ApiUrl { get; set; }
-}

@@ -2,6 +2,8 @@
 using Newtonsoft.Json;
 using paroquiaRussas.Models.Json;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Factory.LiturgyFactory;
+using paroquiaRussas.Utility.Factory.LiturgyFactory.Interface;
 
 namespace paroquiaRussas.Controllers
 {
@@ -24,23 +26,37 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpGet] 
-        public async Task<ActionResult<LiturgyJson>> GetDailyLiturgy() 
+        public async Task<ActionResult> GetDailyLiturgy() 
         {
             try
             {
-                var liturgy = _configuration.Get<LiturgyApiConfig>();
-                string url = liturgy.ApiUrl;
+                LiturgyApiConfig liturgy = new LiturgyApiConfig();
 
-                HttpResponseMessage response = await _httpClient.GetAsync(url);
+                liturgy.ApiUrl = _configuration.GetValue<string>("LiturgyApiConfig:ApiUrl");
+                
+                HttpResponseMessage response = await _httpClient.GetAsync(liturgy.ApiUrl);
 
                 if (!response.IsSuccessStatusCode)
                     return BadRequest("Não foi possível acessar a liturgia diária.");
 
+                DayOfWeek day = DateTime.Now.DayOfWeek;
+
                 string jsonResult = await response.Content.ReadAsStringAsync();
 
-                LiturgyJson liturgyJson = JsonConvert.DeserializeObject<LiturgyJson>(jsonResult);
+                ILiturgyInterface liturgyFactory;
 
-                return liturgyJson;
+                if (day == DayOfWeek.Sunday) {
+                    liturgyFactory = new SundayLiturgyFactory();
+                    SundayLiturgyJson sundayLiturgy = liturgyFactory.CreateSundayLiturgy(jsonResult);
+
+                    return Ok(sundayLiturgy);
+                }
+                
+                liturgyFactory = new WeekLiturgyFactory();
+
+                WeekLiturgyJson weekLiturgyJson = liturgyFactory.CreateWeeklyLiturgy(jsonResult);
+
+                return Ok(weekLiturgyJson);
             }
             catch (Exception ex)
             {
