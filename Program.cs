@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Utility;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +11,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<AppDbContext>(options=>{
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
     options.UseNpgsql(builder.Configuration.GetConnectionString("conn"));
 });
+
 
 var app = builder.Build();
 
@@ -39,4 +42,13 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}");
 
+var liturgy = new LiturgyApiConfig();
+
+app.Configuration.GetSection("LiturgyApiConfig").Bind(liturgy);
+
 app.Run();
+
+public class LiturgyApiConfig
+{
+    public string ApiUrl { get; set; }
+}
