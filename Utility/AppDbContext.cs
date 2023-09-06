@@ -8,7 +8,9 @@ public class AppDbContext : DbContext
 {   
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
-    public DbSet<Person>? Person { get; set; }
+    public DbSet<Person> Person { get; set; }
+
+    public DbSet<Event> Event { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
