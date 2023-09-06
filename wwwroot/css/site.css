@@ -13,6 +13,7 @@
 /*SOBREPOSIÇÃO BOOTSTRAP*/
 body {
     font-family: "Poppins", sans-serif;
+    height: 100vh;
 }
 
 .fw-bold {
@@ -23,12 +24,28 @@ body {
     background-color: var(--secundary-color) !important;
 }
 
-.text-dark {
+.text-dark, .color-icon {
     color: var(--primary-color) !important;
 }
 
 .min-height-96px{
     min-height: 96px;
+}
+
+.nav-link:hover, .color-icon:hover {
+    color: var(--secundary-color) !important;
+}
+
+.footer-menu li a{
+    height: 40px;
+}
+
+.footer-icons-div{
+    margin-bottom: -25px !important;
+}
+
+.gap-top{
+    padding-top: 7rem;
 }
 
 @media (min-width: 576px) {

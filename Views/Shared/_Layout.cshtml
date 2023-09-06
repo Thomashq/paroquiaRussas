@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/paroquiaRussas.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
-    <header>
+    <header class="position-fixed w-100 top-0" style="z-index: 1">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow min-height-96px">
             <div class="container-fluid container-md">
                 <div class="col-lg-6 d-flex justify-content-between w-sm-100">
@@ -39,17 +41,43 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - paroquiaRussas - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    @*<footer class="border-top footer text-muted bg-white bottom-0 position-relative" style="z-index: 1; height: 20vh">
+        <div class="container p-4 pb-5">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <div>
+                    <a class="text-dark fs-4" asp-area="" asp-controller="Home" asp-action="Index">ParoquiaRussas</a>
+                </div>
+                <div class="d-flex align-items-center footer-icons-div">
+                    <a href="https://www.facebook.com/people/Par%C3%B3quia-de-Russas/100063692673100/" target="_blank" class="px-3"><i class="bi bi-facebook color-icon fs-3"></i></a>
+                    <a href="https://www.instagram.com/paroquiaderussas/" target="_blank" class="px-3"><i class="bi bi-instagram color-icon fs-3"></i></a>
+                    <a href="https://www.youtube.com/c/Par%C3%B3quiadeRussas" target="_blank" class="px-3"><i class="bi bi-youtube color-icon fs-3"></i></a>
+                </div>
+                <nav>
+                    <ul class="navbar-nav footer-menu d-flex flex-row">
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">Notícias</a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">Eventos</a>
+                        </li>
+                        <li class="nav-item px-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Liturgy" asp-action="Index">Evangelho</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </footer>
+    </footer>*@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
