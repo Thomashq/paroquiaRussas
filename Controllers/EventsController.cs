@@ -33,6 +33,10 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
+                DateTime dateTimeUtc = eventToPost.EventDate.ToUniversalTime();
+
+                eventToPost.EventDate = dateTimeUtc;
+
                 _appDbContext.Add(eventToPost);
                 await _appDbContext.SaveChangesAsync();
 
@@ -62,8 +66,9 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                DateOnly dateOnly = DateOnly.Parse(date);
-                return _appDbContext.Event.Where(x => x.EventDate == dateOnly).ToList();
+                DateTime dateTime = DateTime.Parse(date);
+                dateTime = dateTime.ToUniversalTime();
+                return _appDbContext.Event.Where(x => x.EventDate == dateTime).ToList();
             }
             catch (Exception ex)
             {
@@ -82,10 +87,16 @@ namespace paroquiaRussas.Controllers
                     return NotFound(); // Retorna 404 caso o evento não seja encontrado
 
                 if (eventUpdate.EventDate != null)
-                    eventToEdit.EventDate = eventUpdate.EventDate;
+                {
+                    DateTime dateTimeUtc = eventUpdate.EventDate.ToUniversalTime();
+                    eventToEdit.EventDate = dateTimeUtc;
+                }
 
                 if (!string.IsNullOrEmpty(eventUpdate.EventDescription))
                     eventToEdit.EventDescription = eventUpdate.EventDescription;
+
+                if (!string.IsNullOrEmpty(eventUpdate.EventAddress))
+                    eventToEdit.EventAddress = eventUpdate.EventAddress;
 
                 if (!string.IsNullOrEmpty(eventUpdate.EventImage))
                     eventToEdit.EventImage = eventUpdate.EventImage;
