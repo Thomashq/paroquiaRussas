@@ -88,6 +88,10 @@ body {
     text-decoration: none;
 }
 
+.footer-menu-style {
+    margin-top: 50px;
+}
+
 @media (max-width: 992px) {
     .title-container::after {
         margin: 1rem 1rem;
@@ -102,6 +106,14 @@ body {
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
     }
+
+    .footer-menu-style{
+        margin-top: 450px;
+    }
+
+    .title-container::after {
+        width: 58%;
+    }
 }
 
 @media (min-width: 576px) {
@@ -115,5 +127,11 @@ body {
 @media (max-width: 576px) {
     .w-sm-100{
         width: 100%
+    }
+}
+
+@media (max-width: 300px) {
+    .footer-menu-navbar{
+        display: none !important;
     }
 }
