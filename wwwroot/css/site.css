@@ -73,6 +73,21 @@ body {
     box-shadow: 0.01rem 0rem 0.1rem var(--primary-color);
 }
 
+.btn-style{
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-style:hover{
+    background: var(--secundary-color);
+    color: white;
+}
+
+.btn-style a{
+    color: white;
+    text-decoration: none;
+}
+
 @media (max-width: 992px) {
     .title-container::after {
         margin: 1rem 1rem;
