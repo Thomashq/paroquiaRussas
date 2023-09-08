@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
+using System.Runtime.CompilerServices;
 
 namespace paroquiaRussas.Controllers
 {
@@ -73,6 +74,25 @@ namespace paroquiaRussas.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public Person GetPersonToLogin(string userName, string password)
+        {
+            try
+            {
+                Person person = new();
+                PasswordEncryption passwordEncryption = new(password);
+
+                password = passwordEncryption.Encrypt(password);
+
+                person = _appDbContext.Person.FirstOrDefault(a => a.Username == userName && a.Pwd == password);
+
+                return person;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao encontrar o usuário", ex);
             }
         }
 
