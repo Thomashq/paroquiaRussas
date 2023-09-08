@@ -28,7 +28,7 @@ namespace paroquiaRussas.Controllers
             return _appDbContext.Event.ToList();
         }
 
-        [HttpPost]
+        [HttpPost] 
         public async Task<IActionResult> AddEvent(Event eventToPost)
         {
             try

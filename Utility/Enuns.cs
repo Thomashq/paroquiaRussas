@@ -12,7 +12,7 @@ namespace paroquiaRussas.Utility
             Writer = 1
         }
 
-        public static string GetEnumDescriptio(Enum value)
+        public static string GetEnumDescription(System.Enum value)
         {
             var fieldInfo = value.GetType().GetField(value.ToString());
 
