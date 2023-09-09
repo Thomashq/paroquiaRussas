@@ -12,6 +12,8 @@ public class AppDbContext : DbContext
 
     public DbSet<Event> Event { get; set; }
 
+    public DbSet<News> News { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

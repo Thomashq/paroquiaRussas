@@ -4,6 +4,6 @@
     {
         public string ApiUrl { get; set; }
 
-        public string ApiSecret { get; private set; } =  "";
+        public string ApiSecret { get; set; }
     }
 }

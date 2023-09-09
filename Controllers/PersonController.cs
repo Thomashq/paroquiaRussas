@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
+using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace paroquiaRussas.Controllers
@@ -20,7 +22,16 @@ namespace paroquiaRussas.Controllers
         [HttpGet]
         public List<Person> GetAllPerson()
         {
-            return _appDbContext.Person.ToList();
+            try
+            {
+                PersonRepository personRepository = new PersonRepository(_appDbContext);
+
+                return personRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
         }
 
         [HttpGet("{id}")]
@@ -28,7 +39,9 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                return _appDbContext.Person.FirstOrDefault(x => x.Id == id);
+                PersonRepository personRepository = new PersonRepository(_appDbContext);
+
+                return personRepository.GetPersonById(id);
             }
             catch (Exception ex)
             {
@@ -41,10 +54,9 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                PasswordEncryption passwordEncryption = new PasswordEncryption(person.Pwd);
-                person.Pwd = passwordEncryption.Encrypt(person.Pwd);
+                PersonRepository personRepository = new PersonRepository(_appDbContext);
+                personRepository.CreateNewPerson(person);
 
-                _appDbContext.Add(person);
                 await _appDbContext.SaveChangesAsync();
 
                 return Ok("Usuário adicionado com sucesso");
@@ -60,15 +72,13 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                Person person = _appDbContext.Person.FirstOrDefault(x => x.Id == id);
+                PersonRepository personRepository = new PersonRepository(_appDbContext);
+                var result = personRepository.DeletePerson(id);
 
-                if (person == null)
-                    return NotFound();
-                                
-                _appDbContext.Person.Remove(person);
-                
+                if (result == null)
+                    return BadRequest();
+
                 await _appDbContext.SaveChangesAsync();
-
                 return Ok("Usuário Deletado com Sucesso");
             }
             catch (Exception ex)
@@ -76,25 +86,5 @@ namespace paroquiaRussas.Controllers
                 throw ex;
             }
         }
-
-        public Person GetPersonToLogin(string userName, string password)
-        {
-            try
-            {
-                Person person = new();
-                PasswordEncryption passwordEncryption = new(password);
-
-                password = passwordEncryption.Encrypt(password);
-
-                person = _appDbContext.Person.FirstOrDefault(a => a.Username == userName && a.Pwd == password);
-
-                return person;
-            }
-            catch(Exception ex)
-            {
-                throw new Exception("Ocorreu um erro ao encontrar o usuário", ex);
-            }
-        }
-
     }
 }

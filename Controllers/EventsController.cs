@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
+using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
 
 namespace paroquiaRussas.Controllers
@@ -25,27 +26,10 @@ namespace paroquiaRussas.Controllers
         [HttpGet]
         public List<Event> GetAllEvents()
         {
-            return _appDbContext.Event.ToList();
-        }
+            EventsRepository eventsRepository = new EventsRepository(_appDbContext);
+            List<Event> events = eventsRepository.GetEvents();
 
-        [HttpPost] 
-        public async Task<IActionResult> AddEvent(Event eventToPost)
-        {
-            try
-            {
-                DateTime dateTimeUtc = eventToPost.EventDate.ToUniversalTime();
-
-                eventToPost.EventDate = dateTimeUtc;
-
-                _appDbContext.Add(eventToPost);
-                await _appDbContext.SaveChangesAsync();
-
-                return Ok("Evento adicionado com sucesso");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao adicionar evento", ex);
-            }
+            return events;
         }
 
         [HttpGet("{id}")]
@@ -53,7 +37,13 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                return _appDbContext.Event.FirstOrDefault(x => x.Id == id);
+                EventsRepository eventsRepository = new EventsRepository(_appDbContext);
+                Event eventToGet = eventsRepository.GetEventById(id);
+
+                if (eventToGet == null)
+                    return NotFound();
+
+                return eventsRepository.GetEventById(id);
             }
             catch (Exception ex)
             {
@@ -66,9 +56,14 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                DateTime dateTime = DateTime.Parse(date);
-                dateTime = dateTime.ToUniversalTime();
-                return _appDbContext.Event.Where(x => x.EventDate == dateTime).ToList();
+                EventsRepository eventsRepository = new EventsRepository(_appDbContext);
+
+                List<Event> eventsToReturn = eventsRepository.GetEventsByDate(date);
+
+                if (eventsToReturn == null)
+                    return new List<Event>();
+
+                return eventsToReturn;
             }
             catch (Exception ex)
             {
@@ -76,40 +71,39 @@ namespace paroquiaRussas.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddEvent(Event eventToPost)
+        {
+            try
+            {
+                EventsRepository eventsRepository = new EventsRepository(_appDbContext);
+                var result = eventsRepository.CreateNewEvent(eventToPost);
+
+                await _appDbContext.SaveChangesAsync();
+
+                return Ok("Evento adicionado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao adicionar evento", ex);
+            }
+        }
+
+
         [HttpPut]
         public IActionResult EditEvent(Event eventUpdate)
         {
             try
             {
-                Event eventToEdit = _appDbContext.Event.FirstOrDefault(x => x.Id == eventUpdate.Id);
+                EventsRepository eventRepository = new EventsRepository(_appDbContext);
+                Event eventToEdit = eventRepository.UpdateEvent(eventUpdate);
 
                 if (eventToEdit == null)
-                    return NotFound(); // Retorna 404 caso o evento não seja encontrado
+                    return NotFound();
 
-                if (eventUpdate.EventDate != null)
-                {
-                    DateTime dateTimeUtc = eventUpdate.EventDate.ToUniversalTime();
-                    eventToEdit.EventDate = dateTimeUtc;
-                }
-
-                if (!string.IsNullOrEmpty(eventUpdate.EventDescription))
-                    eventToEdit.EventDescription = eventUpdate.EventDescription;
-
-                if (!string.IsNullOrEmpty(eventUpdate.EventAddress))
-                    eventToEdit.EventAddress = eventUpdate.EventAddress;
-
-                if (!string.IsNullOrEmpty(eventUpdate.EventImage))
-                    eventToEdit.EventImage = eventUpdate.EventImage;
-
-                if (!string.IsNullOrEmpty(eventUpdate.EventName))
-                    eventToEdit.EventName = eventUpdate.EventName;
-
-                eventToEdit.UpdateDate = DateOnly.FromDateTime(DateTime.Now);
-
-                _appDbContext.Event.Update(eventToEdit);
                 _appDbContext.SaveChanges();
 
-                return Ok(eventToEdit);
+                return Ok("Evento editado com sucesso");
             }
             catch (Exception ex)
             {
@@ -122,12 +116,11 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                Event eventToDelete = await _appDbContext.Event.FirstOrDefaultAsync(x => x.Id == id);
+                EventsRepository eventsRepository = new EventsRepository(_appDbContext);
+                Event eventToDelete = eventsRepository.DeleteEventById(id);
 
                 if (eventToDelete == null)
                     return NotFound();
-
-                _appDbContext.Event.Remove(eventToDelete);
 
                 await _appDbContext.SaveChangesAsync();
 
