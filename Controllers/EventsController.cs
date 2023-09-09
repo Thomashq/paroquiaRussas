@@ -19,7 +19,9 @@ namespace paroquiaRussas.Controllers
         [Route("View")]
         public IActionResult Index()
         {
-            return View();
+            List<Event> eventList = GetAllEvents();
+
+            return View(eventList);
         }
 
         [HttpGet]
