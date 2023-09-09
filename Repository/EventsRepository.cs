@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
+using System;
 
 namespace paroquiaRussas.Repository
 {
@@ -20,7 +21,22 @@ namespace paroquiaRussas.Repository
             {
                 return _appDbContext.Event.ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
+        }
+
+        public List<Event> GetEventsByDateAndName(string eventName, DateOnly eventDate)
+        {
+            try
+            {
+                List<Event> Events = new List<Event>();
+                Events = _appDbContext.Event.Where(x => x.EventName.ToLower().Contains(eventName.ToLower()) && x.EventDate == eventDate).ToList();
+
+                return Events;
+            }
+            catch (Exception ex)
             {
                 throw new Exception();
             }
@@ -34,22 +50,21 @@ namespace paroquiaRussas.Repository
 
                 return eventToGet;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception();
             }
         }
 
-        public List<Event> GetEventsByDate(string date) 
+        public List<Event> GetEventsByDate(string date)
         {
             try
             {
-                DateTime dateTime = DateTime.Parse(date);
-                dateTime = dateTime.ToUniversalTime();
+                DateOnly dateOnly = DateOnly.Parse(date);
 
-                return _appDbContext.Event.Where(x => x.EventDate == dateTime).ToList();
+                return _appDbContext.Event.Where(x => x.EventDate == dateOnly).ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception();
             }
@@ -64,10 +79,10 @@ namespace paroquiaRussas.Repository
                     return null; // Retorna 404 caso o evento não seja encontrado
 
                 if (eventUpdate.EventDate != null)
-                {
-                    DateTime dateTimeUtc = eventUpdate.EventDate.ToUniversalTime();
-                    eventToEdit.EventDate = dateTimeUtc;
-                }
+                    eventToEdit.EventDate = eventUpdate.EventDate;
+                
+                if(eventUpdate.EventTime != null)
+                    eventToEdit.EventTime = eventUpdate.EventTime;
 
                 if (!string.IsNullOrEmpty(eventUpdate.EventDescription))
                     eventToEdit.EventDescription = eventUpdate.EventDescription;
@@ -87,19 +102,16 @@ namespace paroquiaRussas.Repository
 
                 return eventToEdit;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception();
             }
         }
-        
+
         public Event CreateNewEvent(Event eventToPost)
         {
             try
             {
-                DateTime dateTimeUtc = eventToPost.EventDate.ToUniversalTime();
-                eventToPost.EventDate = dateTimeUtc;
-
                 _appDbContext.Add(eventToPost);
 
                 return eventToPost;
@@ -123,10 +135,10 @@ namespace paroquiaRussas.Repository
 
                 return eventToDelete;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception();
             }
-        } 
+        }
     }
 }
