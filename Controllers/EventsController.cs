@@ -24,13 +24,23 @@ namespace paroquiaRussas.Controllers
             return View(eventList);
         }
 
+        //public PartialViewResult LoadGridEvents(string searchText)
+        //{
+        //    List<Event> eventList = GetAllEvents();
+
+        //    var eventListFiltered = eventList.Where(x => !x.EventName.ToLower().Contains(searchText.ToLower()) ||
+        //        x.EventDate.ToString("dd/MM/yyyy").Contains(searchText));
+
+        //    return PartialView("_GridEvents", eventListFiltered);
+        //}
+
         [HttpGet]
         public List<Event> GetAllEvents()
         {
             return _appDbContext.Event.ToList();
         }
 
-        [HttpPost] 
+        [HttpPost]
         public async Task<IActionResult> AddEvent(Event eventToPost)
         {
             try

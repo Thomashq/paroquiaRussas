@@ -1,0 +1,31 @@
+﻿@model List<Event>
+
+<div class="pt-3 pb-5 d-grid">
+    @{
+        if (Model == null)
+        {
+            <p class="text-dark">Por enquanto ainda não há eventos registrados.</p>
+        }
+        else
+        {
+            foreach (Event eventcard in Model)
+            {
+                <div class="card mb-3 text-start">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="@eventcard.EventImage" class="img-fluid rounded-start  w-100" alt="@eventcard.EventName" style="height: 14rem; object-fit: cover" />
+                        </div>
+                        <div class="col-md-8 card-text-box">
+                            <div class="card-body">
+                                <h3 class="card-title text-dark">@eventcard.EventName</h3>
+                                <p class="card-text text-dark">@eventcard.EventDescription</p>
+                                <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @eventcard.EventDate.ToString("dd/MM/yyyy") às @eventcard.EventDate.ToString("HH:mm")</small></p>
+                                <p class="card-text"><small class="text-dark"><i class="bi bi-geo-alt text-dark"></i> @eventcard.EventAddress</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
