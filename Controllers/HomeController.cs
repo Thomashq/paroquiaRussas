@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using paroquiaRussas.Models;
+using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
 
 namespace paroquiaRussas.Controllers;
@@ -20,7 +21,9 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         HomeModel homeModel = new HomeModel();
-        List<Event> eventList = _appDbContext.Event.ToList();
+        EventsRepository eventsRepository = new EventsRepository(_appDbContext);
+
+        List<Event> eventList = eventsRepository.GetEvents();
 
         if (eventList.Count > 2)
         {

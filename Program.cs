@@ -16,6 +16,8 @@ builder.Services.AddControllers();
 
 LiturgyApiConfig liturgyApiConfig = new();
 
+liturgyApiConfig.ApiSecret = builder.Configuration.GetValue<string>("LiturgyApiConfig:ApiSecret");
+
 var key = Encoding.ASCII.GetBytes(liturgyApiConfig.ApiSecret);
 
 builder.Services.AddAuthentication(x =>
