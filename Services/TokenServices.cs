@@ -2,6 +2,7 @@
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using Enum = paroquiaRussas.Utility.Enum;
@@ -10,13 +11,23 @@ namespace paroquiaRussas.Services
 {
     public class TokenServices
     {
-        public static string GenerateToken(Person person)
+        private readonly IConfiguration _configuration;
+
+        public TokenServices(IConfiguration config)
+        {
+            _configuration = config;
+        }
+
+        public string GenerateToken(Person person)
         {
             try
             {
                 LiturgyApiConfig liturgyApiConfig = new();
 
                 var tokenHandler = new JwtSecurityTokenHandler();
+
+                liturgyApiConfig.ApiSecret = _configuration.GetValue<string>("LiturgyApiConfig:ApiSecret");
+
                 var key = Encoding.ASCII.GetBytes(liturgyApiConfig.ApiSecret);
                 string role = Enum.GetEnumDescription(person.Role);
                 

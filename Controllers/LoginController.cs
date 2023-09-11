@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using paroquiaRussas.Models;
+using paroquiaRussas.Repository;
 using paroquiaRussas.Services;
 using paroquiaRussas.Utility;
 
@@ -10,10 +11,12 @@ namespace paroquiaRussas.Controllers
     public class LoginController : Controller
     {
         private readonly AppDbContext _appDbContext;
+        private readonly IConfiguration _configuration;
 
-        public LoginController(AppDbContext appDbContext)
+        public LoginController(AppDbContext appDbContext, IConfiguration configuration)
         {
             _appDbContext = appDbContext;
+            _configuration = configuration;
         }
 
         public ActionResult Index()
@@ -27,14 +30,15 @@ namespace paroquiaRussas.Controllers
         {
             try
             {
-                PersonController personController = new(_appDbContext);
+                PersonRepository personRepository = new PersonRepository(_appDbContext);
 
-                person = personController.GetPersonToLogin(person.Username, person.Pwd);
+                person = personRepository.GetPersonToLogin(person.Username, person.Pwd);
 
                 if (person == null)
                     return NotFound(new { message = "Usuário ou senha inválidos" });
 
-                var token = TokenServices.GenerateToken(person);
+                TokenServices tokenServices = new TokenServices(_configuration);
+                var token = tokenServices.GenerateToken(person);
 
                 return Ok(new {message = "Usuário logado com sucesso"});
             }
