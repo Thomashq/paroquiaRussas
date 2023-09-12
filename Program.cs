@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using paroquiaRussas.Services;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Interfaces;
 using System.Configuration;
 using System.Text;
 
@@ -13,6 +15,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IEmail, MailService>();
 
 LiturgyApiConfig liturgyApiConfig = new();
 
@@ -62,7 +66,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 
 app.MapControllerRoute(
     name: "default",
