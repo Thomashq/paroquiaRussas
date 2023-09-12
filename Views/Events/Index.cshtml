@@ -6,24 +6,18 @@
     <h2 class="text-dark fw-bold-700 text-start title-container">Eventos</h2>
 
     <form>
-        <div class="row g-3">
-            <div class="col-lg-5">
+        <div class="row g-1">
+            <div class="col-lg-12">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInputGrid" placeholder="Missa dominical">
-                    <label for="floatingInputGrid">Nome do Evento</label>
+                    <input type="text" class="form-control text-dark" id="filtro" placeholder="Missa dominical">
+                    <label for="filtro" class="text-dark">Nome do Evento</label>
                 </div>
             </div>
-            @* <div class="col-lg-5">
-            <div class="form-floating">
-            <input type="date" class="form-control" id="floatingInputDateGrid" placeholder="Missa dominical" asp-for="Date">
-            <label for="floatingInputDateGrid">Data do Evento</label>
-            </div>
-            </div>*@
         </div>
     </form>
 
     <div id="gridEvents">
-        @await Html.PartialAsync("_GridEvents");
+        @await Html.PartialAsync("_GridEvents")
     </div>
 </div>
 

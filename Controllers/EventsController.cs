@@ -21,19 +21,10 @@ namespace paroquiaRussas.Controllers
         public IActionResult Index()
         {
             List<Event> eventList = GetAllEvents();
+            eventList.Sort((e1, e2) => e2.EventDate.CompareTo(e1.EventDate));
 
             return View(eventList);
         }
-
-        //public PartialViewResult LoadGridEvents(string searchText)
-        //{
-        //    List<Event> eventList = GetAllEvents();
-
-        //    var eventListFiltered = eventList.Where(x => !x.EventName.ToLower().Contains(searchText.ToLower()) ||
-        //        x.EventDate.ToString("dd/MM/yyyy").Contains(searchText));
-
-        //    return PartialView("_GridEvents", eventListFiltered);
-        //}
 
         [HttpGet]
         public List<Event> GetAllEvents()
