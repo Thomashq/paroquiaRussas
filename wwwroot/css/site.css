@@ -42,7 +42,7 @@ body {
     color: var(--primary-color) !important;
 }
 
-.min-height-96px{
+.min-height-96px {
     min-height: 96px;
 }
 
@@ -50,19 +50,19 @@ body {
     color: var(--secundary-color) !important;
 }
 
-.footer-menu li a{
+.footer-menu li a {
     height: 40px;
 }
 
-.footer-icons-div{
+.footer-icons-div {
     margin-bottom: -25px !important;
 }
 
-.gap-top{
+.gap-top {
     padding-top: 7rem;
 }
 
-.navbar-toggler{
+.navbar-toggler {
     background: var(--secundary-color);
 }
 
@@ -73,23 +73,38 @@ body {
     box-shadow: 0.01rem 0rem 0.1rem var(--primary-color);
 }
 
-.btn-style{
+.btn-style {
     background: var(--primary-color);
     color: white;
 }
 
-.btn-style:hover{
-    background: var(--secundary-color);
-    color: white;
-}
+    .btn-style:hover {
+        background: var(--secundary-color);
+        color: white;
+    }
 
-.btn-style a{
-    color: white;
-    text-decoration: none;
-}
+    .btn-style a {
+        color: white;
+        text-decoration: none;
+    }
 
 .footer-menu-style {
     margin-top: 50px;
+}
+
+.link-news {
+    cursor: pointer;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+    .link-news:hover {
+        text-decoration: underline;
+        color: var(--secundary-color);
+    }
+
+.card-news {
+    border-right: 5px solid var(--gray-low-color);
 }
 
 @media (max-width: 992px) {
@@ -99,7 +114,7 @@ body {
     }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .card-text-box {
         border-bottom: 0.5rem solid var(--primary-color);
         border-right: none;
@@ -107,7 +122,7 @@ body {
         border-bottom-right-radius: 5px;
     }
 
-    .footer-menu-style{
+    .footer-menu-style {
         margin-top: 450px;
     }
 
@@ -125,13 +140,13 @@ body {
 }
 
 @media (max-width: 576px) {
-    .w-sm-100{
+    .w-sm-100 {
         width: 100%
     }
 }
 
 @media (max-width: 300px) {
-    .footer-menu-navbar{
+    .footer-menu-navbar {
         display: none !important;
     }
 }
