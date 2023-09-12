@@ -1,5 +1,6 @@
 ﻿using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Resources;
 
 namespace paroquiaRussas.Repository
 {
@@ -20,7 +21,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC12, ex);
             }
         }
 
@@ -32,7 +33,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(string.Format(Exceptions.EXC10, id), ex);
             }
         }
 
@@ -46,7 +47,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC12, ex);
             }
         }
 
@@ -72,7 +73,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC13, ex);
             }
         }
 
@@ -91,7 +92,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC14, ex);
             }
         }
     }

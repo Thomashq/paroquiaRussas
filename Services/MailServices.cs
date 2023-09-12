@@ -6,11 +6,11 @@ using System.Net.Mail;
 
 namespace paroquiaRussas.Services
 {
-    public class MailService : IEmail
+    public class MailServices : IEmail
     {
         private readonly IConfiguration _configuration;
 
-        public MailService(IConfiguration configuration)
+        public MailServices(IConfiguration configuration)
         {
             _configuration = configuration;
         }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Interfaces;
+using paroquiaRussas.Utility.Resources;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Security.Claims;
@@ -9,7 +11,7 @@ using Enum = paroquiaRussas.Utility.Enum;
 
 namespace paroquiaRussas.Services
 {
-    public class TokenServices
+    public class TokenServices : IToken
     {
         private readonly IConfiguration _configuration;
 
@@ -47,11 +49,13 @@ namespace paroquiaRussas.Services
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
 
-                return tokenHandler.WriteToken(token);
+                string tokenTest =  tokenHandler.WriteToken(token);
+
+                return tokenTest;
             }
             catch(Exception ex)
             {
-                throw new Exception("Não foi possível gerar um token corretamente", ex);
+                throw new Exception(Exceptions.EXC21, ex);
             }
         }
     }

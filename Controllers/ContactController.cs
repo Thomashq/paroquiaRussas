@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility.Interfaces;
+using paroquiaRussas.Utility.Resources;
 
 namespace paroquiaRussas.Controllers
 {
@@ -28,13 +29,13 @@ namespace paroquiaRussas.Controllers
                 bool result = _email.Send(mail);
 
                 if (result == false)
-                    return BadRequest();
+                    return BadRequest(Exceptions.EXC01);
 
                 return Ok(mail);
             }
             catch (Exception ex)
             {
-                throw new Exception("Não foi possível mandar o email", ex);
+                throw new Exception(Exceptions.EXC01, ex);
             }
         }
     }

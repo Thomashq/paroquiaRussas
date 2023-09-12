@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Resources;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -30,7 +31,7 @@ namespace paroquiaRussas.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC15, ex);
             }
         }
 
@@ -45,7 +46,7 @@ namespace paroquiaRussas.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao recuperar usuário pelo Id.", ex);
+                throw new Exception(string.Format(Exceptions.EXC11, id), ex);
             }
         }
 
@@ -59,11 +60,11 @@ namespace paroquiaRussas.Controllers
 
                 await _appDbContext.SaveChangesAsync();
 
-                return Ok("Usuário adicionado com sucesso");
+                return Ok(Messages.MSG08);
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao adicionar usuário", ex);
+                throw new Exception(Exceptions.EXC16, ex);
             }
         }
 
@@ -76,14 +77,15 @@ namespace paroquiaRussas.Controllers
                 var result = personRepository.DeletePerson(id);
 
                 if (result == null)
-                    return BadRequest();
+                    return NotFound(string.Format(Exceptions.EXC11, id));
 
                 await _appDbContext.SaveChangesAsync();
-                return Ok("Usuário Deletado com Sucesso");
+
+                return Ok(Messages.MSG09);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(Exceptions.EXC17, ex);
             }
         }
     }

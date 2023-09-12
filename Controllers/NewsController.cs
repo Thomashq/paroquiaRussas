@@ -2,6 +2,7 @@
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Resources;
 
 namespace paroquiaRussas.Controllers
 {
@@ -33,7 +34,7 @@ namespace paroquiaRussas.Controllers
             }
             catch(Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC10, ex);
             }
         }
 
@@ -49,7 +50,7 @@ namespace paroquiaRussas.Controllers
             }
             catch(Exception ex)
             {
-                throw new Exception();
+                throw new Exception(string.Format(Exceptions.EXC11, id));
             }
         }
 
@@ -63,11 +64,11 @@ namespace paroquiaRussas.Controllers
 
                await _appDbContext.SaveChangesAsync();
 
-                return Ok("Notícia criada com sucesso");
+                return Ok(Messages.MSG05);
             }
             catch(Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC12, ex);
             }
         }
 
@@ -81,15 +82,15 @@ namespace paroquiaRussas.Controllers
                 News newsToEdit = newsRepository.UpdateNews(news);
 
                 if (newsToEdit == null)
-                    return NotFound();
+                    return NotFound(string.Format(Exceptions.EXC11, news.Id));
 
                 _appDbContext.SaveChanges();
 
-                return Ok("Notícia editada com sucesso");
+                return Ok(Messages.MSG06);
             }
             catch(Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC13, ex);
             }
         }
 
@@ -102,15 +103,15 @@ namespace paroquiaRussas.Controllers
                 News newsToDelete = newsRepository.DeleteNews(id);
 
                 if(newsToDelete == null)
-                    return NotFound();
+                    return NotFound(string.Format(Exceptions.EXC11, id));
 
                 _appDbContext.SaveChangesAsync();
 
-                return Ok("Notícia deletada com sucesso");
+                return Ok(Messages.MSG07);
             }
             catch(Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC14, ex);
             }
         }
     }
