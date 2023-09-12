@@ -2,6 +2,23 @@
     ViewData["Title"] = "Notícias";
 }
 
-<div class="text-center mt-4">
-    <h1 class="display-4">Notícias</h1>
+<div class="text-center gap-top mt-4 container">
+    <h2 class="text-dark fw-bold-700 text-start title-container">Notícias</h2>
+
+    <form>
+        <div class="row g-1">
+            <div class="col-lg-12">
+                <div class="form-floating">
+                    <input type="text" class="form-control text-dark" id="filtro-noticias" placeholder="Missa dominical">
+                    <label for="filtro-noticias" class="text-dark">Título da Notícia</label>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div id="gridNews">
+        @await Html.PartialAsync("_GridNews")
+    </div>
 </div>
+
+@await Html.PartialAsync("_FooterLayout")

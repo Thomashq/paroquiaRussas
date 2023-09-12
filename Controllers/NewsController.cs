@@ -15,10 +15,14 @@ namespace paroquiaRussas.Controllers
         {
             _appDbContext = appDbContext;
         }
+
         [Route("View")]
         public IActionResult Index()
         {
-            return View();
+            List<News> newsList = GetNews();
+            newsList.Sort((n1, n2) => n2.CreationDate.CompareTo(n1.CreationDate));
+
+            return View(newsList);
         }
 
         [HttpGet]

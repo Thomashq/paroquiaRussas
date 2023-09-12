@@ -23,3 +23,28 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function () {
+    $("#filtro-noticias").on("keyup", function () {
+        var filtroTexto = $("#filtro-noticias").val().toLowerCase();
+        var nenhumaNoticiaEncontrada = true;
+
+
+        $(".noticia").each(function () {
+            var eventoTexto = $(this).text().toLowerCase();
+
+            if (eventoTexto.indexOf(filtroTexto) === -1) {
+                $(this).hide();
+            } else {
+                $(this).show();
+                nenhumaNoticiaEncontrada = false;
+            }
+        });
+
+        if (nenhumaNoticiaEncontrada) {
+            $("#nenhuma-noticia-encontrada").show();
+        } else {
+            $("#nenhuma-noticia-encontrada").hide();
+        }
+    });
+});
