@@ -20,7 +20,10 @@ namespace paroquiaRussas.Controllers
         [Route("View")]
         public IActionResult Index()
         {
-            return View();
+            List<Event> eventList = GetAllEvents();
+            eventList.Sort((e1, e2) => e2.EventDate.CompareTo(e1.EventDate));
+
+            return View(eventList);
         }
 
         [HttpGet]

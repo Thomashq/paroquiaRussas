@@ -21,17 +21,9 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         HomeModel homeModel = new HomeModel();
-        EventsRepository eventsRepository = new EventsRepository(_appDbContext);
 
-        List<Event> eventList = eventsRepository.GetEvents();
-
-        if (eventList.Count > 2)
-        {
-            homeModel.Events = eventList.GetRange(eventList.Count - 2, 2);
-            return View(homeModel);
-        }
-
-        homeModel.Events = eventList;
+        homeModel.Events = GetTheLastEvents();
+        homeModel.News = GetTheLastNews();
 
         return View(homeModel);
     }
@@ -40,5 +32,29 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    private List<Event> GetTheLastEvents()
+    {
+        EventsRepository eventsRepository = new EventsRepository(_appDbContext);
+
+        List<Event> eventList = eventsRepository.GetEvents();
+
+        if (eventList.Count > 2)
+            return eventList.GetRange(eventList.Count - 2, 2);
+
+        return eventList;
+    }
+
+    private List<News> GetTheLastNews()
+    {
+        NewsRepository newsRepository = new NewsRepository(_appDbContext);
+
+        List<News> newsList = newsRepository.GetNews();
+
+        if (newsList.Count > 2)
+            return newsList.GetRange(newsList.Count - 3, 3);
+
+        return newsList;
     }
 }

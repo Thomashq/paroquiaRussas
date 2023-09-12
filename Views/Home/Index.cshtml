@@ -54,41 +54,36 @@
         </div>
     </section>
 
-    <section class="gap-top container h-100">
+    <section class="gap-top container">
         <div>
             <h2 class="text-dark fw-bold-700 title-container">Notícias</h2>
         </div>
-        <div class="pt-3 pb-5">
-            <p class="text-dark">Por enquanto ainda não há notícias registradas.</p>
-            @*@{
-            if (Model.Events == null)
-            {
+        <div class="pt-3 pb-5 row g-3">
+            @{
+                if (Model.News == null)
+                {
+                    <p class="text-dark">Por enquanto ainda não há notícias registradas.</p>
+                }
+                else
+                {
+                    foreach (News newsCard in Model.News)
+                    {
+                        <div class="card card-news col-lg-4">
+                            <img class="card-img-top" src="@newsCard.NewsImage" alt="@newsCard.Headline">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark"><a class="link-news">@newsCard.NewsTitle</a></h5>
+                                <p class="card-text text-dark">@newsCard.Headline</p>
+                                <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @newsCard.CreationDate.ToString("dd/MM/yyyy")</small></p>
+                            </div>
+                        </div>
+                    }
+                }
             }
-            else
-            {
-            foreach (Event eventcard in Model.News)
-            {
-            <div class="card mb-3">
-            <div class="row g-0">
-            <div class="col-md-4">
-            <img src="@eventcard.EventImage" class="img-fluid rounded-start  w-100" alt="@eventcard.EventName" style="height: 14rem; object-fit: cover" />
-            </div>
-            <div class="col-md-8 card-text-box">
-            <div class="card-body">
-            <h3 class="card-title text-dark">@eventcard.EventName</h3>
-            <p class="card-text text-dark">@eventcard.EventDescription</p>
-            <p class="card-text"><small class="text-muted">@eventcard.EventDate</small></p>
-            </div>
-            </div>
-            </div>
-            </div>
-            }
-            }
-            }*@
         </div>
+        <button type="button" class="btn btn-style"><a asp-controller="News" asp-action="Index">Mais Notícias</a></button>
     </section>
 
-    <section class="gap-top container h-100">
+    <section class="gap-top container">
         <div>
             <h2 class="text-dark fw-bold-700 title-container">Eventos</h2>
         </div>
@@ -111,7 +106,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title text-dark">@eventcard.EventName</h3>
                                         <p class="card-text text-dark">@eventcard.EventDescription</p>
-                                        <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @eventcard.EventDate.ToString("dd/MM/yyyy") às @eventcard.EventDate.ToString("HH:mm")</small></p>
+                                        <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @eventcard.EventDate.ToString("dd/MM/yyyy") às @eventcard.EventTime</small></p>
                                         <p class="card-text"><small class="text-dark"><i class="bi bi-geo-alt text-dark"></i> @eventcard.EventAddress</small></p>
                                     </div>
                                 </div>
@@ -124,34 +119,5 @@
         </div>
     </section>
 
-        <footer class="border-top footer text-muted bg-white bottom-0 footer-menu-style" style="z-index: 1; height: 30vh">
-        <div class="container p-4">
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <div class="py-2">
-                    <a class="text-dark fs-4" asp-area="" asp-controller="Home" asp-action="Index">ParoquiaRussas</a>
-                </div>
-                <div class="d-flex align-items-center footer-icons-div py-2">
-                    <a href="https://www.facebook.com/people/Par%C3%B3quia-de-Russas/100063692673100/" target="_blank" class="px-3"><i class="bi bi-facebook color-icon fs-3"></i></a>
-                    <a href="https://www.instagram.com/paroquiaderussas/" target="_blank" class="px-3"><i class="bi bi-instagram color-icon fs-3"></i></a>
-                    <a href="https://www.youtube.com/c/Par%C3%B3quiadeRussas" target="_blank" class="px-3"><i class="bi bi-youtube color-icon fs-3"></i></a>
-                </div>
-                <nav class="py-4">
-                    <ul class="navbar-nav footer-menu d-flex flex-row footer-menu-navbar">
-                        <li class="nav-item px-2">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
-                        </li>
-                        <li class="nav-item px-2">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">Notícias</a>
-                        </li>
-                        <li class="nav-item px-2">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">Eventos</a>
-                        </li>
-                        <li class="nav-item px-2">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Liturgy" asp-action="Index">Evangelho</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </footer>
+    @await Html.PartialAsync("_FooterLayout")
 </div>

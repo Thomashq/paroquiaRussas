@@ -1,0 +1,26 @@
+﻿@model List<News>
+
+<div class="pt-3 pb-5 row g-3">
+    @{
+        if (Model == null)
+        {
+            <p class="text-dark">Por enquanto ainda não há notícias registradas.</p>
+        }
+        else
+        {
+            <p id="nenhuma-noticia-encontrada" class="text-dark" style="display: none;">Nenhuma notícia foi encontrado.</p>
+
+            foreach (News newsCard in Model)
+            {
+                <div class="card card-news text-start col-lg-4 noticia">
+                    <img class="card-img-top" src="@newsCard.NewsImage" alt="@newsCard.Headline">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><a class="link-news">@newsCard.NewsTitle</a></h5>
+                        <p class="card-text text-dark">@newsCard.Headline</p>
+                        <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @newsCard.CreationDate.ToString("dd/MM/yyyy")</small></p>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
