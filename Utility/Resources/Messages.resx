@@ -147,4 +147,7 @@
   <data name="MSG10" xml:space="preserve">
     <value>Objeto deletado com sucesso.</value>
   </data>
+  <data name="MSG11" xml:space="preserve">
+    <value>Token gerado com sucesso.</value>
+  </data>
 </root>

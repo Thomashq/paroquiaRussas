@@ -5,6 +5,8 @@ using paroquiaRussas.Services;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Interfaces;
 using paroquiaRussas.Utility.Resources;
+using System.Security.Claims;
+using Enum = paroquiaRussas.Utility.Enum;
 
 namespace paroquiaRussas.Controllers
 {
@@ -41,8 +43,13 @@ namespace paroquiaRussas.Controllers
                 if (person == null)
                     return NotFound(new { message = Exceptions.EXC08 });
 
-                TokenServices tokenServices = new TokenServices(_configuration);
-                string token = _token.GenerateToken(person);
+                var claims = new List<Claim>
+                {
+                     new Claim(ClaimTypes.Name, person.Id.ToString()),
+                     new Claim(ClaimTypes.Role, Enum.GetEnumDescription(person.Role))
+                };
+
+                var token = _token.GenerateToken(claims);
 
                 return Ok(new {message = Messages.MSG04});
             }

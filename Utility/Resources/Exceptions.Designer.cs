@@ -248,5 +248,14 @@ namespace paroquiaRussas.Utility.Resources {
                 return ResourceManager.GetString("EXC21", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Invalide token..
+        /// </summary>
+        public static string EXC22 {
+            get {
+                return ResourceManager.GetString("EXC22", resourceCulture);
+            }
+        }
     }
 }

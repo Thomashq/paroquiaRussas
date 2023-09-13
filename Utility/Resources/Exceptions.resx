@@ -180,4 +180,7 @@
   <data name="EXC21" xml:space="preserve">
     <value>Não foi possível gerar um token corretamente.</value>
   </data>
+  <data name="EXC22" xml:space="preserve">
+    <value>Invalide token.</value>
+  </data>
 </root>

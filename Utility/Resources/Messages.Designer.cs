@@ -149,5 +149,14 @@ namespace paroquiaRussas.Utility.Resources {
                 return ResourceManager.GetString("MSG10", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Token gerado com sucesso..
+        /// </summary>
+        public static string MSG11 {
+            get {
+                return ResourceManager.GetString("MSG11", resourceCulture);
+            }
+        }
     }
 }

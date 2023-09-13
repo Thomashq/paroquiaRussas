@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
@@ -49,7 +50,8 @@ namespace paroquiaRussas.Controllers
                 throw new Exception(string.Format(Exceptions.EXC11, id), ex);
             }
         }
-
+        
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Addperson(Person person)
         {
