@@ -11,6 +11,9 @@ namespace paroquiaRussas.Utility
 
             string formatedText = Regex.Replace(liturgyText, @"(\d+)", @"<sup>$1 </sup>");
 
+            if(formatedText.Contains("Ou:"))
+                formatedText = Regex.Replace(formatedText, @",Ou:(.*)", "");
+
             return formatedText;
         }
 
