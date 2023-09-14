@@ -183,4 +183,7 @@
   <data name="EXC22" xml:space="preserve">
     <value>Invalide token.</value>
   </data>
+  <data name="EXC23" xml:space="preserve">
+    <value>Não foi possível gravar o token.</value>
+  </data>
 </root>

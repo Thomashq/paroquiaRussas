@@ -43,17 +43,9 @@ namespace paroquiaRussas.Services
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
 
-                string encryptedToken = tokenHandler.WriteToken(token);
-
-                _httpContextAccessor.HttpContext.Response.Cookies.Append("token", encryptedToken,
-                    new CookieOptions
-                    {
-                        Expires = DateTime.Now.AddHours(3),
-                        HttpOnly = true,
-                        Secure = true,
-                        IsEssential = true,
-                        SameSite = SameSiteMode.None
-                    });
+                string encryptedToken = tokenHandler.WriteToken(token);       
+                
+                SaveTokenOnCookie(encryptedToken);
 
                 return new {Messages.MSG11};
             }
@@ -108,6 +100,26 @@ namespace paroquiaRussas.Services
             catch(Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        private void SaveTokenOnCookie(string encryptedToken)
+        {
+            try
+            {
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("token_auth", encryptedToken,
+                    new CookieOptions
+                    {
+                        Expires = DateTime.Now.AddHours(3),
+                        HttpOnly = true,
+                        Secure = true,
+                        IsEssential = true,
+                        SameSite = SameSiteMode.None
+                    });
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(Exceptions.EXC23);
             }
         }
     }

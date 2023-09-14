@@ -257,5 +257,14 @@ namespace paroquiaRussas.Utility.Resources {
                 return ResourceManager.GetString("EXC22", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possível gravar o token..
+        /// </summary>
+        public static string EXC23 {
+            get {
+                return ResourceManager.GetString("EXC23", resourceCulture);
+            }
+        }
     }
 }

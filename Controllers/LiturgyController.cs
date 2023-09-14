@@ -27,7 +27,7 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpGet] 
-        public async Task<ActionResult> GetDailyLiturgy() 
+        public async Task<dynamic> GetDailyLiturgy() 
         {
             try
             {
@@ -50,14 +50,14 @@ namespace paroquiaRussas.Controllers
                     liturgyFactory = new SundayLiturgyFactory();
                     SundayLiturgyJson sundayLiturgy = liturgyFactory.CreateSundayLiturgy(jsonResult);
 
-                    return Ok(sundayLiturgy);
+                    return sundayLiturgy;
                 }
                 
                 liturgyFactory = new WeekLiturgyFactory();
 
                 WeekLiturgyJson weekLiturgyJson = liturgyFactory.CreateWeeklyLiturgy(jsonResult);
 
-                return Ok(weekLiturgyJson);
+                return weekLiturgyJson;
             }
             catch (Exception ex)
             {
