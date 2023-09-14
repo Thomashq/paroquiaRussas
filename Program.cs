@@ -33,7 +33,7 @@ builder.Services.AddAuthentication(x =>
 
 }).AddCookie(x =>
 {
-    x.Cookie.Name = "token";
+    x.Cookie.Name = "token_auth";
 
 }).AddJwtBearer(x =>
 {
