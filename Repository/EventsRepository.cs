@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Resources;
 using System;
 
 namespace paroquiaRussas.Repository
@@ -23,7 +24,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC18, ex);
             }
         }
 
@@ -38,7 +39,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC18, ex);
             }
         }
 
@@ -52,7 +53,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(string.Format(Exceptions.EXC11, id), ex);
             }
         }
 
@@ -66,9 +67,10 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(string.Format(Exceptions.EXC19, date), ex);
             }
         }
+
         public Event UpdateEvent(Event eventUpdate)
         {
             try
@@ -104,7 +106,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC05, ex);
             }
         }
 
@@ -118,7 +120,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC04, ex);
             }
         }
 
@@ -137,7 +139,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC06, ex);
             }
         }
     }
