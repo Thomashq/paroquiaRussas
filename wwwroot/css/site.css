@@ -107,6 +107,27 @@ body {
     border-right: 10px solid var(--gray-low-color);
 }
 
+.card-header {
+    background-color: var(--white-color) !important;
+}
+
+.nav-liturgy {
+    color: var(--primary-color) !important;
+}
+
+    .nav-liturgy.active {
+        background-color: var(--secundary-color) !important;
+        color: white !important;
+    }
+
+        .nav-liturgy.active:hover {
+            color: var(--white-color) !important;
+        }
+
+sup{
+    font-weight: bold;
+}
+
 @media (max-width: 992px) {
     .title-container::after {
         margin: 1rem 1rem;

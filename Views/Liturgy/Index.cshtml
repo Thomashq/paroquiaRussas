@@ -1,7 +1,58 @@
 ﻿@{
-    ViewData["Title"] = "Evangelho";
+    ViewData["Title"] = "Liturgia";
 }
+@model LiturgyModel
 
-<div class="text-center mt-4">
-    <h1 class="display-4">Evangelho</h1>
+<div class="text-center gap-top mt-4 container">
+    <h2 class="text-dark fw-bold-700 text-start title-container">Liturgia</h2>
+
+    <div class="card mt-3 text-start text-dark">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item col-md-4" style="cursor: pointer">
+                    <a class="nav-link nav-liturgy active fs-5" data-nav="leitura">1ª Leitura</a>
+                </li>
+                <li class="nav-item col-md-4" style="cursor: pointer">
+                    <a class="nav-link nav-liturgy fs-5" data-nav="salmo">Salmo</a>
+                </li>
+                <li class="nav-item col-md-4" style="cursor: pointer">
+                    <a class="nav-link nav-liturgy fs-5" data-nav="evangelho">Evangelho</a>
+                </li>
+            </ul>
+        </div>
+        <div class="my-2 container">
+            <p class="my-0"><small>@DateTime.Now.ToString("dd/MM/yyyy")</small></p>
+            <p class="my-0"><small>COR LITÚRGICA: @Model.cor.ToUpper()</small></p>
+            <h4>@Model.liturgia</h4>
+            <hr />
+        </div>
+
+        <div class="card-body conteudo-leitura">
+            <p class="card-title">Primeira Leitura (@Model.primeiraLeitura.referencia)</p>
+            <h5 class="card-text">@Model.primeiraLeitura.titulo</h5>
+            <p class="fs-6 lh-lg container" style="text-align: justify">@Html.Raw(@Model.primeiraLeitura.texto)</p>
+
+            <p class="fs-6 lh-lg container" style="text-align: justify">— Palavra do Senhor.</p>
+            <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Graças a Deus</strong>.</p>
+        </div>
+
+        <div class="card-body conteudo-salmo" style="display: none;">
+            <p class="card-title">Responsório (@Model.salmo.referencia)</p>
+            <h5 class="card-text">— @Model.salmo.refrao</h5>
+            <p class="fs-6 lh-lg container" style="text-align: justify">— @Model.salmo.refrao</p>
+            <p class="fs-6 lh-lg container" style="text-align: justify">@Html.Raw(@Model.salmo.texto)</p>
+        </div>
+
+        <div class="card-body conteudo-evangelho" style="display: none;">
+            <p class="card-title">Evangelho (@Model.evangelho.referencia)</p>
+            <h5 class="card-text">@Model.evangelho.titulo</h5>
+            <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Glória a vós, Senhor</strong>.</p>
+            <p class="fs-6 lh-lg container" style="text-align: justify">@Html.Raw(@Model.evangelho.texto)</p>
+
+            <p class="fs-6 lh-lg container" style="text-align: justify">— Palavra da Salvação.</p>
+            <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Glória a vós, Senhor.</strong>.</p>
+        </div>
+    </div>
 </div>
+
+@await Html.PartialAsync("_FooterLayout")
