@@ -1,30 +1,31 @@
-﻿<footer class="border-top footer text-muted bg-white bottom-0 footer-menu-style" style="z-index: 1; height: 30vh">
-    <div class="container p-4">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class="py-2">
-                <a class="text-dark fs-4" asp-area="" asp-controller="Home" asp-action="Index">ParoquiaRussas</a>
+﻿<footer class="footer-container">
+    <div class="footer-container-information">
+        <div class="icon-church-div">
+            <a class="text-dark fs-4" asp-area="" asp-controller="Home" asp-action="Index">ParoquiaRussas</a>
+        </div>
+        <div class="footer-container-menu">
+            <div class="footer-container-first-menu">
+                <p><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Início</a></p>
+                <p><a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">Notícias</a></p>
+                <p><a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">Eventos</a></p>
             </div>
-            <div class="d-flex align-items-center footer-icons-div py-2">
-                <a href="https://www.facebook.com/people/Par%C3%B3quia-de-Russas/100063692673100/" target="_blank" class="px-3"><i class="bi bi-facebook color-icon fs-3"></i></a>
-                <a href="https://www.instagram.com/paroquiaderussas/" target="_blank" class="px-3"><i class="bi bi-instagram color-icon fs-3"></i></a>
-                <a href="https://www.youtube.com/c/Par%C3%B3quiadeRussas" target="_blank" class="px-3"><i class="bi bi-youtube color-icon fs-3"></i></a>
+            <div class="footer-container-second-menu">
+                <p><a class="nav-link text-dark" asp-area="" asp-controller="Liturgy" asp-action="Index">Evangelho</a></p>
+                <p><a class="nav-link text-dark talk-to-us" asp-area="" asp-controller="Contact" asp-action="Index">Contato</a></p>
             </div>
-            <nav class="py-4">
-                <ul class="navbar-nav footer-menu d-flex flex-row footer-menu-navbar">
-                    <li class="nav-item px-2">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
-                    </li>
-                    <li class="nav-item px-2">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">Notícias</a>
-                    </li>
-                    <li class="nav-item px-2">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">Eventos</a>
-                    </li>
-                    <li class="nav-item px-2">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Liturgy" asp-action="Index">Evangelho</a>
-                    </li>
-                </ul>
-            </nav>
+        </div>
+        <div class="links-icons-footer">
+            <a href="https://www.facebook.com/people/Par%C3%B3quia-de-Russas/100063692673100/" target="_blank" class="px-3"><i class="bi bi-facebook color-icon fs-3"></i></a>
+            <a href="https://www.instagram.com/paroquiaderussas/" target="_blank" class="px-3"><i class="bi bi-instagram color-icon fs-3"></i></a>
+            <a href="https://www.youtube.com/c/Par%C3%B3quiadeRussas" target="_blank" class="px-3"><i class="bi bi-youtube color-icon fs-3"></i></a>          
+        </div>
+        <div class="footer-container-local">
+            <p><strong>Paróquia Nossa Senhora do Rosário</strong></p>
+            <p>
+                <i class="bi bi-geo-alt text-dark fs-4"></i>   Av. Dom Lino, 923-981
+                - Centro, Russas - CE, 62900-000
+            </p> 
+            <p><i class="bi bi-telephone-fill fs-4"></i>   (88) 3411-0166</p>
         </div>
     </div>
 </footer>

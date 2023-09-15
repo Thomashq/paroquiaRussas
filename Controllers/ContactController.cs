@@ -16,10 +16,11 @@ namespace paroquiaRussas.Controllers
             _email = email;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        [Route("View")]
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult SendMail(Mail mail)
