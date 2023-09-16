@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EXC01" xml:space="preserve">
-    <value>Não foi possível enviar o email.</value>
+    <value>Não foi possível enviar o email. Por favor tente novamente mais tarde.</value>
   </data>
   <data name="EXC02" xml:space="preserve">
     <value>Ocorreu um problema ao tentar encontrar evento.</value>

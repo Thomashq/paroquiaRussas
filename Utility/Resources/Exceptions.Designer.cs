@@ -59,9 +59,9 @@ namespace paroquiaRussas.Utility.Resources {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possível enviar o email..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possível enviar o email. Por favor tente novamente mais tarde..
         /// </summary>
         public static string EXC01 {
             get {
