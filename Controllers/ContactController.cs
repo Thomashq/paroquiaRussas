@@ -23,16 +23,20 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendMail(Mail mail)
+        public IActionResult SendMail([FromForm] Mail mail)
         {
             try
             {
                 bool result = _email.Send(mail);
 
                 if (result == false)
-                    return BadRequest(Exceptions.EXC01);
+                {
+                    TempData["ErrorMessage"] = Exceptions.EXC01;
+                    return RedirectToAction("Index");
+                }
 
-                return Ok(mail);
+                TempData["SucessMessage"] = Messages.MSG12;
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

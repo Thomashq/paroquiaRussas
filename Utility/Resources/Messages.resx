@@ -150,4 +150,7 @@
   <data name="MSG11" xml:space="preserve">
     <value>Token gerado com sucesso.</value>
   </data>
+  <data name="MSG12" xml:space="preserve">
+    <value>Sua mensagem foi enviada! Agradecemos.</value>
+  </data>
 </root>

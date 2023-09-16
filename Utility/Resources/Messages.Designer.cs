@@ -158,5 +158,16 @@ namespace paroquiaRussas.Utility.Resources {
                 return ResourceManager.GetString("MSG11", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Sua mensagem foi enviada! Agradecemos..
+        /// </summary>
+        public static string MSG12
+        {
+            get
+            {
+                return ResourceManager.GetString("MSG12", resourceCulture);
+            }
+        }
     }
 }
