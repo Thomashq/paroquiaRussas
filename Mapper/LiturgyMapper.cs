@@ -35,6 +35,9 @@ namespace paroquiaRussas.Mapper
             liturgyModel.evangelho.texto = LiturgyEditor.FormatLiturgyText(liturgyModel.evangelho.texto);
             liturgyModel.salmo.texto = LiturgyEditor.FormatSalmText(liturgyModel.salmo.texto);
 
+            if(liturgyModel.segundaLeituraDomingo != null)
+                liturgyModel.segundaLeituraDomingo.texto = LiturgyEditor.FormatLiturgyText(liturgyModel.segundaLeituraDomingo.texto);
+
             return liturgyModel;
         }
 

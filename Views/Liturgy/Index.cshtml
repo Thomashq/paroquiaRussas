@@ -9,15 +9,30 @@
     <div class="card mt-3 text-start text-dark">
         <div class="card-header">
             <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item col-md-4" style="cursor: pointer">
-                    <a class="nav-link nav-liturgy active fs-5" data-nav="leitura">1ª Leitura</a>
-                </li>
-                <li class="nav-item col-md-4" style="cursor: pointer">
-                    <a class="nav-link nav-liturgy fs-5" data-nav="salmo">Salmo</a>
-                </li>
-                <li class="nav-item col-md-4" style="cursor: pointer">
-                    <a class="nav-link nav-liturgy fs-5" data-nav="evangelho">Evangelho</a>
-                </li>
+                @{
+                    string col = "col-4";
+
+                    if (Model.segundaLeituraDomingo != null)
+                        col = "col-md-3 col-6";
+
+                    <li class="nav-item @col" style="cursor: pointer">
+                        <a class="nav-link nav-liturgy active fs-5" data-nav="leitura">1ª Leitura</a>
+                    </li>
+
+                    if (Model.segundaLeituraDomingo != null)
+                    {
+                        <li class="nav-item @col" style="cursor: pointer">
+                            <a class="nav-link nav-liturgy fs-5" data-nav="segunda">2ª Leitura</a>
+                        </li>
+                    }
+
+                    <li class="nav-item @col" style="cursor: pointer">
+                        <a class="nav-link nav-liturgy fs-5" data-nav="salmo">Salmo</a>
+                    </li>
+                    <li class="nav-item @col" style="cursor: pointer">
+                        <a class="nav-link nav-liturgy fs-5" data-nav="evangelho">Evangelho</a>
+                    </li>
+                }
             </ul>
         </div>
         <div class="my-2 container">
@@ -36,6 +51,19 @@
             <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Graças a Deus</strong>.</p>
         </div>
 
+        @{
+            if(Model.segundaLeituraDomingo != null){
+                <div class="card-body conteudo-segunda" style="display: none;">
+                    <p class="card-title">Segunda Leitura (@Model.segundaLeituraDomingo.referencia)</p>
+                    <h5 class="card-text">@Model.segundaLeituraDomingo.titulo</h5>
+                    <p class="fs-6 lh-lg container" style="text-align: justify">@Html.Raw(@Model.segundaLeituraDomingo.texto)</p>
+
+                    <p class="fs-6 lh-lg container" style="text-align: justify">— Palavra do Senhor.</p>
+                    <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Graças a Deus</strong>.</p>
+                </div>
+            }
+        }
+
         <div class="card-body conteudo-salmo" style="display: none;">
             <p class="card-title">Responsório (@Model.salmo.referencia)</p>
             <h5 class="card-text">— @Model.salmo.refrao</h5>
@@ -50,7 +78,7 @@
             <p class="fs-6 lh-lg container" style="text-align: justify">@Html.Raw(@Model.evangelho.texto)</p>
 
             <p class="fs-6 lh-lg container" style="text-align: justify">— Palavra da Salvação.</p>
-            <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Glória a vós, Senhor.</strong>.</p>
+            <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Glória a vós, Senhor</strong>.</p>
         </div>
     </div>
 </div>
