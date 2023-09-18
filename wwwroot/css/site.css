@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
+@import url("footer.css");
 
 :root {
     --primary-color: #9c4521;
@@ -105,6 +106,10 @@ body {
 
 .card-news {
     border-right: 10px solid var(--gray-low-color);
+}
+
+.talk-to-us {
+    color: white !important;
 }
 
 .card-header {

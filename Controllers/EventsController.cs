@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Resources;
+using System.Security.Cryptography;
 
 namespace paroquiaRussas.Controllers
 {
@@ -50,7 +53,7 @@ namespace paroquiaRussas.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao encontrar evento", ex);
+                throw new Exception(Exceptions.EXC02, ex);
             }
         }
 
@@ -70,7 +73,7 @@ namespace paroquiaRussas.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao recuperar evento por data", ex);
+                throw new Exception(Exceptions.EXC03, ex);
             }
         }
 
@@ -84,11 +87,11 @@ namespace paroquiaRussas.Controllers
 
                 await _appDbContext.SaveChangesAsync();
 
-                return Ok("Evento adicionado com sucesso");
+                return Ok(Messages.MSG01);
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao adicionar evento", ex);
+                throw new Exception(Exceptions.EXC04, ex);
             }
         }
 
@@ -106,11 +109,11 @@ namespace paroquiaRussas.Controllers
 
                 _appDbContext.SaveChanges();
 
-                return Ok("Evento editado com sucesso");
+                return Ok(Messages.MSG02);
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao editar evento", ex);
+                throw new Exception(Exceptions.EXC05, ex);
             }
         }
 
@@ -127,11 +130,11 @@ namespace paroquiaRussas.Controllers
 
                 await _appDbContext.SaveChangesAsync();
 
-                return Ok("Evento excluído com sucesso");
+                return Ok(Messages.MSG03);
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao excluir evento", ex);
+                throw new Exception(Exceptions.EXC06, ex);
             }
         }
     }

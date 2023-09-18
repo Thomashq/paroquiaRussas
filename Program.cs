@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using paroquiaRussas.Services;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Interfaces;
 using System.Configuration;
 using System.Text;
 
@@ -14,6 +16,10 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IEmail, MailServices>();
+builder.Services.AddScoped<IToken, TokenServices>();
+
 LiturgyApiConfig liturgyApiConfig = new();
 
 liturgyApiConfig.ApiSecret = builder.Configuration.GetValue<string>("LiturgyApiConfig:ApiSecret");
@@ -24,19 +30,31 @@ builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-    .AddJwtBearer(x =>
+
+}).AddCookie(x =>
+{
+    x.Cookie.Name = "token_auth";
+
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
     {
-        x.RequireHttpsMetadata = false;
-        x.SaveToken = true;
-        x.TokenValidationParameters = new TokenValidationParameters
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
+    x.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
         {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key),
-            ValidateIssuer = false,
-            ValidateAudience = false,
-        };
-    });
+            context.Token = context.Request.Cookies["token_auth"];
+            return Task.CompletedTask;
+        }
+    };
+});
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -62,7 +80,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 
 app.MapControllerRoute(
     name: "default",

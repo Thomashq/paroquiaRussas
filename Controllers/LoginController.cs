@@ -3,6 +3,10 @@ using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Services;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Interfaces;
+using paroquiaRussas.Utility.Resources;
+using System.Security.Claims;
+using Enum = paroquiaRussas.Utility.Enum;
 
 namespace paroquiaRussas.Controllers
 {
@@ -12,11 +16,13 @@ namespace paroquiaRussas.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly IConfiguration _configuration;
+        private readonly IToken _token;
 
-        public LoginController(AppDbContext appDbContext, IConfiguration configuration)
+        public LoginController(AppDbContext appDbContext, IConfiguration configuration, IToken token)
         {
             _appDbContext = appDbContext;
             _configuration = configuration;
+            _token = token;
         }
 
         public ActionResult Index()
@@ -35,16 +41,21 @@ namespace paroquiaRussas.Controllers
                 person = personRepository.GetPersonToLogin(person.Username, person.Pwd);
 
                 if (person == null)
-                    return NotFound(new { message = "Usuário ou senha inválidos" });
+                    return NotFound(new { message = Exceptions.EXC08 });
 
-                TokenServices tokenServices = new TokenServices(_configuration);
-                var token = tokenServices.GenerateToken(person);
+                var claims = new List<Claim>
+                {
+                     new Claim(ClaimTypes.Name, person.Id.ToString()),
+                     new Claim(ClaimTypes.Role, Enum.GetEnumDescription(person.Role))
+                };
 
-                return Ok(new {message = "Usuário logado com sucesso"});
+                var token = _token.GenerateToken(claims);
+
+                return Ok(new {message = Messages.MSG04});
             }
             catch(Exception ex) 
             {
-                throw new Exception("Não foi possível efetuar login.", ex);
+                throw new Exception(Exceptions.EXC09, ex);
             }
         }
     }

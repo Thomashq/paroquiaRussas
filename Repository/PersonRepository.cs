@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
+using paroquiaRussas.Utility.Resources;
 using System;
 
 namespace paroquiaRussas.Repository
@@ -29,7 +30,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao encontrar o usuário", ex);
+                throw new Exception(Exceptions.EXC20, ex);
             }
         }
 
@@ -41,7 +42,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao recuperar usuário pelo Id.", ex);
+                throw new Exception(string.Format(Exceptions.EXC11, id), ex);
             }
         }
 
@@ -53,7 +54,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC15, ex);
             }
         }
 
@@ -70,7 +71,7 @@ namespace paroquiaRussas.Repository
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC16, ex);
             }
         }
 
@@ -83,14 +84,14 @@ namespace paroquiaRussas.Repository
                 if (personToDelete != null)
                 {
                     _appDbContext.Person.Remove(personToDelete);
-                    return "Objeto deletado com sucesso"; //substituir a string depois
+                    return Messages.MSG10; 
                 }
 
                 return null;
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(Exceptions.EXC17, ex);
             }
         }
     }

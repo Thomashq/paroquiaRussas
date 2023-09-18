@@ -5,6 +5,7 @@ using paroquiaRussas.Models.Json;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Factory.LiturgyFactory;
 using paroquiaRussas.Utility.Factory.LiturgyFactory.Interface;
+using paroquiaRussas.Utility.Resources;
 
 namespace paroquiaRussas.Controllers
 {
@@ -31,8 +32,8 @@ namespace paroquiaRussas.Controllers
             return View(liturgyModel);
         }
 
-        [HttpGet]
-        public async Task<dynamic> GetDailyLiturgy()
+        [HttpGet] 
+        public async Task<dynamic> GetDailyLiturgy() 
         {
             try
             {
@@ -43,7 +44,7 @@ namespace paroquiaRussas.Controllers
                 HttpResponseMessage response = await _httpClient.GetAsync(liturgy.ApiUrl);
 
                 if (!response.IsSuccessStatusCode)
-                    return BadRequest("Não foi possível acessar a liturgia diária.");
+                    return BadRequest(Exceptions.EXC07);
 
                 DayOfWeek day = DateTime.Now.DayOfWeek;
 

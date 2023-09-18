@@ -66,3 +66,7 @@ function changeTextToNavbarLiturgy() {
         $(this).addClass("active");
     });
 };
+
+$(".close-alert").click(function () {
+    $('.alert').hide('hide');
+});
