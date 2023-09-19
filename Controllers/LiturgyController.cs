@@ -25,15 +25,22 @@ namespace paroquiaRussas.Controllers
         [Route("View")]
         public async Task<IActionResult> Index()
         {
-            var dailyLiturgy = await GetDailyLiturgy();
+            try
+            {
+                var dailyLiturgy = await GetDailyLiturgy();
 
-            LiturgyModel liturgyModel = LiturgyMapper.LiturgyJsonToModel(dailyLiturgy);
+                LiturgyModel liturgyModel = LiturgyMapper.LiturgyJsonToModel(dailyLiturgy);
 
-            return View(liturgyModel);
+                return View(liturgyModel);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/Error.cshtml");
+            }
         }
 
-        [HttpGet] 
-        public async Task<dynamic> GetDailyLiturgy() 
+        [HttpGet]
+        public async Task<dynamic> GetDailyLiturgy()
         {
             try
             {
