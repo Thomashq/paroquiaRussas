@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using paroquiaRussas.Mapper;
+using paroquiaRussas.Models;
 using paroquiaRussas.Models.Json;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Factory.LiturgyFactory;
@@ -14,27 +15,39 @@ namespace paroquiaRussas.Controllers
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
-        
+
         public LiturgyController(IConfiguration config)
         {
-            _httpClient= new HttpClient();
+            _httpClient = new HttpClient();
             _configuration = config;
         }
 
-        public IActionResult Index()
+        [Route("View")]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            try
+            {
+                var dailyLiturgy = await GetDailyLiturgy();
+
+                LiturgyModel liturgyModel = LiturgyMapper.LiturgyJsonToModel(dailyLiturgy);
+
+                return View(liturgyModel);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/Error.cshtml");
+            }
         }
 
-        [HttpGet] 
-        public async Task<dynamic> GetDailyLiturgy() 
+        [HttpGet]
+        public async Task<dynamic> GetDailyLiturgy()
         {
             try
             {
                 LiturgyApiConfig liturgy = new LiturgyApiConfig();
 
                 liturgy.ApiUrl = _configuration.GetValue<string>("LiturgyApiConfig:ApiUrl");
-                
+
                 HttpResponseMessage response = await _httpClient.GetAsync(liturgy.ApiUrl);
 
                 if (!response.IsSuccessStatusCode)
@@ -46,13 +59,14 @@ namespace paroquiaRussas.Controllers
 
                 ILiturgyInterface liturgyFactory;
 
-                if (day == DayOfWeek.Sunday) {
+                if (day == DayOfWeek.Sunday)
+                {
                     liturgyFactory = new SundayLiturgyFactory();
                     SundayLiturgyJson sundayLiturgy = liturgyFactory.CreateSundayLiturgy(jsonResult);
 
                     return sundayLiturgy;
                 }
-                
+
                 liturgyFactory = new WeekLiturgyFactory();
 
                 WeekLiturgyJson weekLiturgyJson = liturgyFactory.CreateWeeklyLiturgy(jsonResult);

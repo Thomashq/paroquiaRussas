@@ -1,4 +1,8 @@
-﻿//filtros
+﻿$(document).ready(function () {
+    changeTextToNavbarLiturgy();
+});
+
+//filtros
 $(document).ready(function () {
     $("#filtro").on("keyup", function () {
         var filtroTexto = $("#filtro").val().toLowerCase();
@@ -49,6 +53,19 @@ $(document).ready(function () {
     });
 });
 
+
+//NAVBAR LITURGIA
+function changeTextToNavbarLiturgy() {
+    $(".nav-link").click(function () {
+        $(".card-body").hide();
+        $(".nav-link").removeClass("active");
+
+        var selectedTab = $(this).attr("data-nav");
+
+        $(".conteudo-" + selectedTab).show();
+        $(this).addClass("active");
+    });
+};
 
 $(".close-alert").click(function () {
     $('.alert').hide('hide');
