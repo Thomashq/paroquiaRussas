@@ -153,4 +153,7 @@
   <data name="MSG12" xml:space="preserve">
     <value>Sua mensagem foi enviada! Agradecemos.</value>
   </data>
+  <data name="MSG13" xml:space="preserve">
+    <value>Ocorreu um erro ao carregar a notícia. </value>
+  </data>
 </root>

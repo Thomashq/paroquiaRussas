@@ -169,5 +169,16 @@ namespace paroquiaRussas.Utility.Resources {
                 return ResourceManager.GetString("MSG12", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro ao carregar a notícia. .
+        /// </summary>
+        public static string MSG13
+        {
+            get
+            {
+                return ResourceManager.GetString("MSG13", resourceCulture);
+            }
+        }
     }
 }
