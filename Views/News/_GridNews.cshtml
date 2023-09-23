@@ -32,23 +32,4 @@
     }
 </div>
 
-<div id="modal" class="modal fade text-start text-dark" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header w-100">
-                <img id="image-modal" class="w-100" style="height: 30vh; object-fit: cover" />
-            </div>
-            <div class="modal-body">
-                <h3 class="modal-title fs-4"></h3>
-                <h5 class="modal-headline fs-6"></h5>
-                <p class="card-text"><i class="bi bi-calendar text-dark"></i><small class="text-dark modal-date mx-2"></small></p>
-
-                <div class="modal-content-news" style="text-align: justify">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
+@await Html.PartialAsync("_ModalNews")
