@@ -1,32 +1,20 @@
-﻿@model News
+﻿<div id="modal" class="modal fade text-start text-dark" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header w-100">
+                <img id="image-modal" class="w-100" style="height: 30vh; object-fit: cover" />
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title fs-4"></h3>
+                <h5 class="modal-headline fs-6"></h5>
+                <p class="card-text"><i class="bi bi-calendar text-dark"></i><small class="text-dark modal-date mx-2"></small></p>
 
-@{
-    if (Model == null)
-    {
-        <div class="alert alert-danger text-start" role="alert">
-            <p class="text-dark">
-                Não foi possível visualizar a notícia.
-            </p>
-            <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
-        </div>
-    }
-    else{
-        <div class="modal fade" id="modal-@Model.Id" tabindex="-1" aria-labelledby="modal-@Model.Headline" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal-@Model.Headline">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        @Model.NewsContent
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                <div class="modal-content-news" style="text-align: justify">
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
         </div>
-    }
-}
+    </div>
+</div>

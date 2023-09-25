@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     changeTextToNavbarLiturgy();
+    openModalNews();
 });
 
 //filtros
@@ -70,3 +71,48 @@ function changeTextToNavbarLiturgy() {
 $(".close-alert").click(function () {
     $('.alert').hide('hide');
 });
+
+
+//MODAL NOTICIAS
+function openModalNews() {
+    $(".link-news").click(function () {
+        var newsId = $(this).data("id");
+        $.ajax({
+            url: "/api/News/View/" + newsId,
+            method: "GET",
+            success: function (data) {
+                if (data.error) {
+                    createPopupError(data.error)
+                } else {
+                    $("#modal").modal('show');
+                    fillsModalFields(data.data);
+                }
+            },
+            error: function () {
+                createPopupError()
+            }
+        });
+
+        return false;
+    });
+}
+
+function fillsModalFields(data) {
+    var content = data.newsContent.replace(/\\n\\n/g, "<br>");
+    var contentSplited = content.split("<br>");
+
+    $(".modal-title").text(data.newsTitle);
+    $(".modal-headline").text(data.headline);
+
+    $("#image-modal").attr("src", data.newsImage);
+    $("#image-modal").attr("alt", data.headline);
+
+    $(".modal-date").text(formatDate(data.creationDate));
+
+    $(".modal-content-news").empty();
+
+    contentSplited.forEach(function (item) {
+        var element = $("<p>").text(item);
+        $(".modal-content-news").append(element);
+    });
+}

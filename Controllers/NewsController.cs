@@ -27,7 +27,7 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpGet]
-        public List<News> GetNews() 
+        public List<News> GetNews()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace paroquiaRussas.Controllers
 
                 return newsList;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(Exceptions.EXC10, ex);
             }
@@ -52,7 +52,7 @@ namespace paroquiaRussas.Controllers
 
                 return news;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(string.Format(Exceptions.EXC11, id));
             }
@@ -66,11 +66,11 @@ namespace paroquiaRussas.Controllers
                 NewsRepository newsRepository = new NewsRepository(_appDbContext);
                 var result = newsRepository.CreateNewNews(news);
 
-               await _appDbContext.SaveChangesAsync();
+                await _appDbContext.SaveChangesAsync();
 
                 return Ok(Messages.MSG05);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(Exceptions.EXC12, ex);
             }
@@ -92,7 +92,7 @@ namespace paroquiaRussas.Controllers
 
                 return Ok(Messages.MSG06);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(Exceptions.EXC13, ex);
             }
@@ -106,16 +106,33 @@ namespace paroquiaRussas.Controllers
                 NewsRepository newsRepository = new NewsRepository(_appDbContext);
                 News newsToDelete = newsRepository.DeleteNews(id);
 
-                if(newsToDelete == null)
+                if (newsToDelete == null)
                     return NotFound(string.Format(Exceptions.EXC11, id));
 
                 _appDbContext.SaveChangesAsync();
 
                 return Ok(Messages.MSG07);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(Exceptions.EXC14, ex);
+            }
+        }
+
+        [Route("View/{id}")]
+        public IActionResult OpenModalNews(long id)
+        {
+            try
+            {
+                News news = new News();
+
+                news = GetNewsById(id);
+
+                return Json(new { data = news });
+            }
+            catch(Exception ex)
+            {
+                return Json(new { error = Messages.MSG13 });
             }
         }
     }

@@ -71,7 +71,9 @@
                         <div class="card card-news col-lg-4">
                             <img class="card-img-top" src="@newsCard.NewsImage" alt="@newsCard.Headline">
                             <div class="card-body">
-                                <h5 class="card-title text-dark"><a class="link-news">@newsCard.NewsTitle</a></h5>
+                                <h5 class="card-title text-dark">
+                                    <a class="link-news" data-target="#modal-@newsCard.Id" data-id="@newsCard.Id">@newsCard.NewsTitle</a>
+                                </h5>
                                 <p class="card-text text-dark">@newsCard.Headline</p>
                                 <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @newsCard.CreationDate.ToString("dd/MM/yyyy")</small></p>
                             </div>
@@ -79,6 +81,8 @@
                     }
                 }
             }
+
+            @await Html.PartialAsync("~/Views/News/_ModalNews.cshtml")
         </div>
         <button type="button" class="btn btn-style"><a asp-controller="News" asp-action="Index">Mais Notícias</a></button>
     </section>
