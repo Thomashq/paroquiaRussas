@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Interfaces;
@@ -21,7 +22,7 @@ namespace paroquiaRussas.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public dynamic GenerateToken(IEnumerable<Claim> claims)
+        public void GenerateToken(IEnumerable<Claim> claims)
         {
             try
             {
@@ -46,60 +47,10 @@ namespace paroquiaRussas.Services
                 string encryptedToken = tokenHandler.WriteToken(token);       
                 
                 SaveTokenOnCookie(encryptedToken);
-
-                return new {Messages.MSG11};
             }
             catch(Exception ex)
             {
                 throw new Exception(Exceptions.EXC21, ex);
-            }
-        }
-
-        public string GenerateRefreshToken()
-        {
-            try
-            {
-                var randomNumber = new byte[32];
-                using var rng = RandomNumberGenerator.Create();
-                rng.GetBytes(randomNumber);
-
-                return Convert.ToBase64String(randomNumber);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
-        {
-            try
-            {
-                LiturgyApiConfig liturgyApiConfig = new LiturgyApiConfig();
-                    
-                liturgyApiConfig.ApiSecret = _configuration.GetValue<string>("LiturgyApiConfig:ApiSecret");
-
-                var tokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateAudience = false,
-                    ValidateIssuer = false,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(liturgyApiConfig.ApiSecret)),
-                    ValidateLifetime = false
-                };
-
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
-
-                if (securityToken is not JwtSecurityToken jwtSecurityToken || 
-                    !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-                        throw new SecurityTokenException(Exceptions.EXC22);
-
-                return principal;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
             }
         }
 

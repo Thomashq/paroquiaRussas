@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Services;
@@ -49,7 +50,7 @@ namespace paroquiaRussas.Controllers
                      new Claim(ClaimTypes.Role, Enum.GetEnumDescription(person.Role))
                 };
 
-                var token = _token.GenerateToken(claims);
+                _token.GenerateToken(claims);
 
                 return Ok(new {message = Messages.MSG04});
             }
