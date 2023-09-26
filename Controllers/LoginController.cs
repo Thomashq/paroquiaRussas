@@ -25,6 +25,7 @@ namespace paroquiaRussas.Controllers
             _token = token;
         }
 
+        [Route("View")]
         public ActionResult Index()
         {
             return View();
