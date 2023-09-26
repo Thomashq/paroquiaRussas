@@ -34,7 +34,6 @@ namespace paroquiaRussas.Services
 
                 var key = Encoding.ASCII.GetBytes(liturgyApiConfig.ApiSecret);
 
-                //Token vai expirar a cada 3h, será usado para definir se o usuário está logado
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(claims),

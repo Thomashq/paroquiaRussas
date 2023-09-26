@@ -60,7 +60,6 @@ namespace paroquiaRussas.Repository
                 if (newsToEdit == null)
                     return null;
 
-                //só faz as trocas de valores se os membros do objeto news forem diferentes de nulo
                 newsToEdit.UpdateDate = DateOnly.FromDateTime(DateTime.Now);
                 newsToEdit.NewsTitle = news.NewsTitle ?? newsToEdit.NewsTitle;
                 newsToEdit.Headline = news.Headline ?? newsToEdit.Headline;

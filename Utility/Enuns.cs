@@ -26,7 +26,6 @@ namespace paroquiaRussas.Utility
                 }
             }
 
-            // Se não houver um atributo Description, retorna o nome do enum como padrão
             return value.ToString();
         }
     }
