@@ -2,6 +2,7 @@
     ViewData["Title"] = "Login";
     Layout = null;
 }
+@model Person
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -40,18 +41,26 @@
                                         <a class="navbar-brand text-dark" asp-area="" asp-controller="Home" asp-action="Index">ParoquiaRussas</a>
                                     </div>
 
-                                    <form>
+                                    @if (TempData["ErrorMessage"] != null)
+                                    {
+                                        <div class="alert alert-danger text-start" role="alert">
+                                            @TempData["ErrorMessage"]
+                                            <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+                                        </div>
+                                    }
+
+                                    <form asp-controller="Login" asp-action="Login" method="post">
                                         <div class="form-floating col-lg-12 my-4">
-                                            <input type="text" class="form-control text-dark" id="nameInput" placeholder="Paulo Guilherme" required>
+                                            <input type="text" class="form-control text-dark" id="nameInput" placeholder="Paulo Guilherme" required asp-for="Username">
                                             <label for="nameInput" class="text-dark">Digite seu nome</label>
                                         </div>
 
                                         <div class="form-floating col-lg-12 my-4">
-                                            <input type="password" class="form-control text-dark" id="pwdInput" placeholder="Paulo Guilherme" required>
+                                            <input type="password" class="form-control text-dark" id="pwdInput" placeholder="Paulo Guilherme" required asp-for="Pwd">
                                             <label for="pwdInput" class="text-dark">Digite sua senha</label>
                                         </div>
 
-                                        <button class="col-4 btn-style" style="border-radius: 5px; border: none; height: 40px;">Login</button>
+                                        <button type="submit" class="col-4 btn-style" style="border-radius: 5px; border: none; height: 40px;" asp-controller="Login" asp-action="Login">Login</button>
                                     </form>
 
                                 </div>
@@ -64,6 +73,7 @@
         </div>
     </section>
 
+    <script src="~/js/utility.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

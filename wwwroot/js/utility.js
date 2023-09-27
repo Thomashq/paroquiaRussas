@@ -16,3 +16,7 @@ function createPopupError(message) {
         errorMessageDiv.fadeOut();
     }, 4000);
 }
+
+$(".close-alert").click(function () {
+    $('.alert').hide('hide');
+});

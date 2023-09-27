@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
-using paroquiaRussas.Services;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Interfaces;
 using paroquiaRussas.Utility.Resources;
@@ -32,8 +31,28 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpPost]
-        [Route("login")]
-        public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] Person person)
+        public async Task<IActionResult> Login([FromForm] Person person)
+        {
+            try
+            {
+                LoginModel loginModel = await AuthenticateAsync(person);
+
+                if (loginModel.Status == StatusCodes.Status404NotFound)
+                {
+                    TempData["ErrorMessage"] = loginModel.Message;
+                    return RedirectToAction("Index");
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
+        public async Task<LoginModel> AuthenticateAsync([FromBody] Person person)
         {
             try
             {
@@ -42,7 +61,7 @@ namespace paroquiaRussas.Controllers
                 person = personRepository.GetPersonToLogin(person.Username, person.Pwd);
 
                 if (person == null)
-                    return NotFound(new { message = Exceptions.EXC08 });
+                    return new LoginModel { Message = Exceptions.EXC08, Status = 404 };
 
                 var claims = new List<Claim>
                 {
@@ -50,11 +69,11 @@ namespace paroquiaRussas.Controllers
                      new Claim(ClaimTypes.Role, Enum.GetEnumDescription(person.Role))
                 };
 
-                var token = _token.GenerateToken(claims);
+                var token = await _token.GenerateToken(claims);
 
-                return Ok(new {message = Messages.MSG04});
+                return new LoginModel { Message = Messages.MSG04, Status = 200 };
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 throw new Exception(Exceptions.EXC09, ex);
             }
