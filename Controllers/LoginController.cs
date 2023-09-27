@@ -43,7 +43,7 @@ namespace paroquiaRussas.Controllers
                     return RedirectToAction("Index");
                 }
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Admin");
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@ namespace paroquiaRussas.Controllers
                      new Claim(ClaimTypes.Role, Enum.GetEnumDescription(person.Role))
                 };
 
-                var token = await _token.GenerateToken(claims);
+                var token = _token.GenerateToken(claims);
 
                 return new LoginModel { Message = Messages.MSG04, Status = 200 };
             }
