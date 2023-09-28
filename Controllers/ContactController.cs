@@ -29,7 +29,7 @@ namespace paroquiaRussas.Controllers
             {
                 bool result = _email.Send(mail);
 
-                if (result == false)
+                if (!result)
                 {
                     TempData["ErrorMessage"] = Exceptions.EXC01;
                     return RedirectToAction("Index");
