@@ -18,6 +18,10 @@ body {
     height: 100vh;
 }
 
+.body-admin {
+    background: var(--primary-color);
+}
+
 .fw-bold {
     font-weight: 500 !important;
 }
@@ -116,16 +120,16 @@ body {
     background-color: var(--white-color) !important;
 }
 
-.nav-liturgy {
+.nav-cards {
     color: var(--primary-color) !important;
 }
 
-    .nav-liturgy.active {
+    .nav-cards.active {
         background-color: var(--secundary-color) !important;
         color: white !important;
     }
 
-        .nav-liturgy.active:hover {
+        .nav-cards.active:hover {
             color: var(--white-color) !important;
         }
 
