@@ -19,7 +19,7 @@
 <body class="body-admin">
     <section class="h-100 gradient-form">
         <div class="text-center my-5">
-            <img src="~/img/logoparoquia.png" alt="logotipo paróquia de russas" style="width: 20rem"/>
+            <img src="~/img/logoparoquia.png" alt="logotipo paróquia de russas" style="width: 20rem" />
         </div>
         <div class="text-center mt-4 container">
 
@@ -42,15 +42,15 @@
                 </div>
 
                 <div class="card-body conteudo-noticias">
-                    <p>noticias</p>
+                    @await Html.PartialAsync("_NewsForms")
                 </div>
 
                 <div class="card-body conteudo-eventos" style="display: none;">
-                    <p>eventos</p>
+                    @await Html.PartialAsync("_EventsForms")
                 </div>
 
                 <div class="card-body conteudo-usuarios" style="display: none;">
-                    <p>usuarios</p>
+                    @await Html.PartialAsync("_UserForms")
                 </div>
             </div>
         </div>
