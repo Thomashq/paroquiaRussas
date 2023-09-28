@@ -129,14 +129,26 @@ body {
             color: var(--white-color) !important;
         }
 
-sup{
+sup {
     font-weight: bold;
+}
+
+.gradient-custom-2 {
+    background: linear-gradient(45deg, var(--primary-color), var(--secundary-color), var(--primary-color));
+    background-size: 200% 200%;
 }
 
 @media (max-width: 992px) {
     .title-container::after {
         margin: 1rem 1rem;
         width: 65%;
+    }
+}
+
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
     }
 }
 
@@ -154,6 +166,10 @@ sup{
 
     .title-container::after {
         width: 58%;
+    }
+
+    .gradient-form {
+        height: 100vh !important;
     }
 }
 

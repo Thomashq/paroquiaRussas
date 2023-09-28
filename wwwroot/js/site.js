@@ -68,11 +68,6 @@ function changeTextToNavbarLiturgy() {
     });
 };
 
-$(".close-alert").click(function () {
-    $('.alert').hide('hide');
-});
-
-
 //MODAL NOTICIAS
 function openModalNews() {
     $(".link-news").click(function () {
