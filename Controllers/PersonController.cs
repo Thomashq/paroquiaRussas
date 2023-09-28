@@ -1,15 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
-using paroquiaRussas.Services;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Interfaces;
 using paroquiaRussas.Utility.Resources;
-using System;
-using System.Runtime.CompilerServices;
 
 namespace paroquiaRussas.Controllers
 {
@@ -77,6 +72,7 @@ namespace paroquiaRussas.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePerson(long id)
         {

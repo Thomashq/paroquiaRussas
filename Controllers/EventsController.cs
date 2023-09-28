@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Resources;
-using System.Security.Cryptography;
 
 namespace paroquiaRussas.Controllers
 {
@@ -77,6 +75,7 @@ namespace paroquiaRussas.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddEvent(Event eventToPost)
         {
@@ -95,7 +94,7 @@ namespace paroquiaRussas.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpPut]
         public IActionResult EditEvent(Event eventUpdate)
         {
@@ -117,6 +116,7 @@ namespace paroquiaRussas.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Event>> DeleteEvent(long id)
         {

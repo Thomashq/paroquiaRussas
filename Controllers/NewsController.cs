@@ -3,6 +3,7 @@ using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Resources;
+using Microsoft.AspNetCore.Authorization;
 
 namespace paroquiaRussas.Controllers
 {
@@ -58,6 +59,7 @@ namespace paroquiaRussas.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateNewNews(News news)
         {
@@ -76,6 +78,7 @@ namespace paroquiaRussas.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         public IActionResult UpdateNews(News news)
         {
@@ -98,6 +101,7 @@ namespace paroquiaRussas.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<News>> DeleteNews(long id)
         {
