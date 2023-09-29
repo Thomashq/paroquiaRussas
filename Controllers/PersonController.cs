@@ -53,7 +53,6 @@ namespace paroquiaRussas.Controllers
             }
         }
         
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Addperson(Person person)
         {
