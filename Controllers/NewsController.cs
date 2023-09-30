@@ -59,7 +59,7 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNewNews(News news)
+        public async Task<IActionResult> CreateNewNews([FromForm] News news)
         {
             try
             {
@@ -68,11 +68,13 @@ namespace paroquiaRussas.Controllers
 
                 await _appDbContext.SaveChangesAsync();
 
-                return Ok(Messages.MSG05);
+                TempData["SucessMessage"] = Messages.MSG05;
+                return RedirectToAction("Index", "Admin");
             }
             catch (Exception ex)
             {
-                throw new Exception(Exceptions.EXC12, ex);
+                TempData["ErrorMessage"] = Exceptions.EXC12;
+                return RedirectToAction("Index", "Admin");
             }
         }
 

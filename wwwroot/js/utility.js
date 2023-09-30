@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     changeTextToNavbarCards();
+    createImageInBase64();
 });
 
 function formatDate(dataString) {
@@ -37,3 +38,21 @@ function changeTextToNavbarCards() {
         $(this).addClass("active");
     });
 };
+
+function createImageInBase64() {
+    $('#formFileSm').change(function () {
+        var input = this;
+        var file = input.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var base64Value = file.name + ',' + e.target.result;
+                $('#newsImageBase64').val(base64Value);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+}

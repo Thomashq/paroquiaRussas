@@ -266,5 +266,16 @@ namespace paroquiaRussas.Utility.Resources {
                 return ResourceManager.GetString("EXC23", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao salvar imagem..
+        /// </summary>
+        public static string EXC24
+        {
+            get
+            {
+                return ResourceManager.GetString("EXC23", resourceCulture);
+            }
+        }
     }
 }

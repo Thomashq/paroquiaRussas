@@ -186,4 +186,7 @@
   <data name="EXC23" xml:space="preserve">
     <value>Não foi possível gravar o token.</value>
   </data>
+  <data name="EXC24" xml:space="preserve">
+    <value>Erro ao salvar imagem.</value>
+  </data>
 </root>
