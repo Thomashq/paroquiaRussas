@@ -20,11 +20,11 @@
     <form class="row g-2 align-content-start" asp-controller="News" asp-action="CreateNewNews" method="post">
         <div class="form-floating col-lg-12 my-2">
             <input type="text" class="form-control text-dark" id="titleInput" placeholder="Encontro de Casais" asp-for="NewsTitle" required>
-            <label for="titleInput" class="text-dark">Título da Notícia</label>
+            <label for="titleInput" class="text-dark">Escreva o Título da Notícia</label>
         </div>
         <div class="form-floating col-lg-12 my-2">
             <input type="text" class="form-control text-dark" id="headlineInput" placeholder="Retiro Espiritual de Setembro" asp-for="Headline" required>
-            <label for="headlineInput" class="text-dark">Digite a Manchete da Notícia</label>
+            <label for="headlineInput" class="text-dark">Escreva a Manchete da Notícia</label>
         </div>
         <div class="form-floating col-lg-12 my-2">
             <textarea class="form-control text-dark" id="contentInput" asp-for="NewsContent" required></textarea>

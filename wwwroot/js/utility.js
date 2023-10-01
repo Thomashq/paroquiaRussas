@@ -36,6 +36,8 @@ function changeTextToNavbarCards() {
 
         $(".conteudo-" + selectedTab).show();
         $(this).addClass("active");
+
+        clearAllFieldsFromAdmin(selectedTab);
     });
 };
 
@@ -55,4 +57,14 @@ function createImageInBase64() {
             reader.readAsDataURL(file);
         }
     });
+}
+
+function clearAllFieldsFromAdmin(conteudo) {
+    if (conteudo === "usuarios" || conteudo === "eventos" || conteudo === "noticias") {
+        $("#contentInput").val("");
+        $("#headlineInput").val("");
+        $("#titleInput").val("");
+        $("#newsImageBase64").val("");
+        $("#formFileSm").val("");
+    }
 }
