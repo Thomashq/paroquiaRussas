@@ -44,7 +44,7 @@ namespace paroquiaRussas.Repository
             {
                 news.CreationDate = DateOnly.FromDateTime(DateTime.Now);
                 news.UpdateDate = DateOnly.FromDateTime(DateTime.Now);
-                news.NewsImage = ManagementImages.SaveImage(news.NewsImage);
+                news.NewsImage = ImagesManagement.SaveImage(news.NewsImage);
 
                 _appDbContext.News.Add(news);
 

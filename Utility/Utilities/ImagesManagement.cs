@@ -2,7 +2,7 @@
 
 namespace paroquiaRussas.Utility.Utilities
 {
-    public class ManagementImages
+    public class ImagesManagement
     {
         private const string IMAGEPATH = "wwwroot/img/";
 
@@ -13,9 +13,9 @@ namespace paroquiaRussas.Utility.Utilities
 
             string imageName = image.Split(',')[0];
 
-            string basa64 = image.Split(',')[2];
+            string base64 = image.Split(',')[2];
 
-            byte[] imageBytes = Convert.FromBase64String(basa64);
+            byte[] imageBytes = Convert.FromBase64String(base64);
 
             string imagePath = Path.Combine(IMAGEPATH, imageName);
 
