@@ -1,4 +1,9 @@
-﻿function formatDate(dataString) {
+﻿$(document).ready(function () {
+    changeTextToNavbarCards();
+    createImageInBase64();
+});
+
+function formatDate(dataString) {
     const data = new Date(dataString + "T00:00:00");
     const dia = String(data.getDate()).padStart(2, '0');
     const mes = String(data.getMonth() + 1).padStart(2, '0');
@@ -20,3 +25,46 @@ function createPopupError(message) {
 $(".close-alert").click(function () {
     $('.alert').hide('hide');
 });
+
+//NAVBAR CARDS (LITURGIA E ADMIN)
+function changeTextToNavbarCards() {
+    $(".nav-link").click(function () {
+        $(".card-body").hide();
+        $(".nav-link").removeClass("active");
+
+        var selectedTab = $(this).attr("data-nav");
+
+        $(".conteudo-" + selectedTab).show();
+        $(this).addClass("active");
+
+        clearAllFieldsFromAdmin(selectedTab);
+    });
+};
+
+function createImageInBase64() {
+    $('#formFileSm').change(function () {
+        var input = this;
+        var file = input.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var base64Value = file.name + ',' + e.target.result;
+                $('#newsImageBase64').val(base64Value);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+function clearAllFieldsFromAdmin(conteudo) {
+    if (conteudo === "usuarios" || conteudo === "eventos" || conteudo === "noticias") {
+        $("#contentInput").val("");
+        $("#headlineInput").val("");
+        $("#titleInput").val("");
+        $("#newsImageBase64").val("");
+        $("#formFileSm").val("");
+    }
+}

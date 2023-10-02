@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    changeTextToNavbarLiturgy();
+    changeTextToNavbarCards();
     openModalNews();
 });
 
@@ -53,20 +53,6 @@ $(document).ready(function () {
         }
     });
 });
-
-
-//NAVBAR LITURGIA
-function changeTextToNavbarLiturgy() {
-    $(".nav-link").click(function () {
-        $(".card-body").hide();
-        $(".nav-link").removeClass("active");
-
-        var selectedTab = $(this).attr("data-nav");
-
-        $(".conteudo-" + selectedTab).show();
-        $(this).addClass("active");
-    });
-};
 
 //MODAL NOTICIAS
 function openModalNews() {

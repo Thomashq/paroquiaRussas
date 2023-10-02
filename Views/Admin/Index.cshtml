@@ -16,12 +16,41 @@
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
-<body>
-    <section class="h-100 gradient-form">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-xl-10">
-                    <h1>Formulários</h1>
+<body class="body-admin h-100">
+    <section class="my-5">
+        <div class="text-center">
+            <img src="~/img/logoparoquia.png" alt="logotipo paróquia de russas" style="width: 20rem" />
+        </div>
+        <div class="text-center mt-4 container">
+
+            <div class="card mt-3 text-start text-dark">
+                <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+
+                        <li class="nav-item col-md-4 col-6" style="cursor: pointer">
+                            <a class="nav-link nav-cards active fs-5" data-nav="noticias">Notícias</a>
+                        </li>
+
+                        <li class="nav-item col-md-4 col-6" style="cursor: pointer">
+                            <a class="nav-link nav-cards fs-5" data-nav="eventos">Eventos</a>
+                        </li>
+
+                        <li class="nav-item col-md-4 col-6" style="cursor: pointer">
+                            <a class="nav-link nav-cards fs-5" data-nav="usuarios">Usuários</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-body conteudo-noticias">
+                    @await Html.PartialAsync("_NewsForms")
+                </div>
+
+                <div class="card-body conteudo-eventos" style="display: none;">
+                    @await Html.PartialAsync("_EventsForms")
+                </div>
+
+                <div class="card-body conteudo-usuarios" style="display: none;">
+                    @await Html.PartialAsync("_UserForms")
                 </div>
             </div>
         </div>

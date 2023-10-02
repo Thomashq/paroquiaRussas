@@ -1,6 +1,7 @@
 ﻿using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Resources;
+using paroquiaRussas.Utility.Utilities;
 
 namespace paroquiaRussas.Repository
 {
@@ -41,6 +42,10 @@ namespace paroquiaRussas.Repository
         {
             try
             {
+                news.CreationDate = DateOnly.FromDateTime(DateTime.Now);
+                news.UpdateDate = DateOnly.FromDateTime(DateTime.Now);
+                news.NewsImage = ImagesManagement.SaveImage(news.NewsImage);
+
                 _appDbContext.News.Add(news);
 
                 return news;
