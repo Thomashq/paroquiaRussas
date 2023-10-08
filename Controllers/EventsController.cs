@@ -78,7 +78,7 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEvent(Event eventToPost)
+        public async Task<IActionResult> AddEvent([FromForm]  Event eventToPost)
         {
             try
             {
@@ -87,11 +87,13 @@ namespace paroquiaRussas.Controllers
 
                 await _appDbContext.SaveChangesAsync();
 
-                return Ok(Messages.MSG01);
+                TempData["SucessMessage"] = Messages.MSG01;
+                return RedirectToAction("Index", "Admin");
             }
             catch (Exception ex)
             {
-                throw new Exception(Exceptions.EXC04, ex);
+                TempData["ErrorMessage"] = Exceptions.EXC04;
+                return RedirectToAction("Index", "Admin");
             }
         }
 

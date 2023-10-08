@@ -2,7 +2,7 @@
 {
     public class Event : BaseModel
     {
-        public DateOnly EventDate { get; set; }
+        public string EventDate { get; set; }
 
         public string EventTime { get; set; }
 

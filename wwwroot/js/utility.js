@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     changeTextToNavbarCards();
-    createImageInBase64();
+    createImageInBase64ForNews();
+    createImageInBase64ForEvents();
 });
 
 function formatDate(dataString) {
@@ -41,7 +42,7 @@ function changeTextToNavbarCards() {
     });
 };
 
-function createImageInBase64() {
+function createImageInBase64ForNews() {
     $('#formFileSm').change(function () {
         var input = this;
         var file = input.files[0];
@@ -59,6 +60,24 @@ function createImageInBase64() {
     });
 }
 
+function createImageInBase64ForEvents() {
+    $('#formEventsFileSm').change(function () {
+        var input = this;
+        var file = input.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var base64Value = file.name + ',' + e.target.result;
+                $('#eventsImageBase64').val(base64Value);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
 function clearAllFieldsFromAdmin(conteudo) {
     if (conteudo === "usuarios" || conteudo === "eventos" || conteudo === "noticias") {
         $("#contentInput").val("");
@@ -66,5 +85,13 @@ function clearAllFieldsFromAdmin(conteudo) {
         $("#titleInput").val("");
         $("#newsImageBase64").val("");
         $("#formFileSm").val("");
+
+        $("#nameInput").val("");
+        $("#descriptionInput").val("");
+        $("#addressInput").val("");
+        $("#dateInput").val("");
+        $("#timeInput").val("");
+        $("#formEventsFileSm").val("");
+        $("#eventsImageBase64").val("");
     }
 }
