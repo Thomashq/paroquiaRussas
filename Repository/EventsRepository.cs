@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using paroquiaRussas.Models;
+﻿using paroquiaRussas.Models;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Resources;
-using System;
+using paroquiaRussas.Utility.Utilities;
+using System.Globalization;
 
 namespace paroquiaRussas.Repository
 {
@@ -28,7 +27,7 @@ namespace paroquiaRussas.Repository
             }
         }
 
-        public List<Event> GetEventsByDateAndName(string eventName, DateOnly eventDate)
+        public List<Event> GetEventsByDateAndName(string eventName, string eventDate)
         {
             try
             {
@@ -61,9 +60,7 @@ namespace paroquiaRussas.Repository
         {
             try
             {
-                DateOnly dateOnly = DateOnly.Parse(date);
-
-                return _appDbContext.Event.Where(x => x.EventDate == dateOnly).ToList();
+                return _appDbContext.Event.Where(x => x.EventDate == date).ToList();
             }
             catch (Exception ex)
             {
@@ -114,6 +111,13 @@ namespace paroquiaRussas.Repository
         {
             try
             {
+                eventToPost.CreationDate = DateOnly.FromDateTime(DateTime.Now);
+                eventToPost.UpdateDate = DateOnly.FromDateTime(DateTime.Now);
+                eventToPost.EventImage = ImagesManagement.SaveImage(eventToPost.EventImage);
+
+                if (DateTime.TryParseExact(eventToPost.EventDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime data))
+                    eventToPost.EventDate = data.ToString("dd/MM/yyyy");
+
                 _appDbContext.Add(eventToPost);
 
                 return eventToPost;
