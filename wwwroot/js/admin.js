@@ -17,6 +17,10 @@ function clearAllFieldsFromAdmin(conteudo) {
         $("#timeInput").val("");
         $("#formEventsFileSm").val("");
         $("#eventsImageBase64").val("");
+
+        $("#userNameInput").val("");
+        $("#pwdInput").val("");
+        $("#pwdRepeatInput").val("");
     }
 }
 
