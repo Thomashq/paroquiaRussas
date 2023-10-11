@@ -58,6 +58,13 @@ namespace paroquiaRussas.Controllers
             try
             {
                 PersonRepository personRepository = new PersonRepository(_appDbContext);
+
+                if(ValidateExistingPerson(person, personRepository) == true)
+                {
+                    TempData["ErrorMessage"] = Exceptions.EXC16;
+                    return RedirectToAction("Index", "Admin");
+                }
+
                 personRepository.CreateNewPerson(person);
 
                 await _appDbContext.SaveChangesAsync();
@@ -91,6 +98,16 @@ namespace paroquiaRussas.Controllers
             {
                 throw new Exception(Exceptions.EXC17, ex);
             }
+        }
+
+        private bool ValidateExistingPerson(Person person, PersonRepository personRepository)
+        {
+            Person existingPerson = personRepository.GetPersonToLogin(person.Username, person.Pwd);
+
+            if (existingPerson != null)
+                return true;
+
+            return false;
         }
     }
 }
