@@ -53,7 +53,7 @@ namespace paroquiaRussas.Controllers
         
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Addperson(Person person)
+        public async Task<IActionResult> Addperson([FromForm] Person person)
         {
             try
             {
@@ -62,11 +62,13 @@ namespace paroquiaRussas.Controllers
 
                 await _appDbContext.SaveChangesAsync();
 
-                return Ok(Messages.MSG08);
+                TempData["SucessMessage"] = Messages.MSG08;
+                return RedirectToAction("Index", "Admin");
             }
             catch (Exception ex)
             {
-                throw new Exception(Exceptions.EXC16, ex);
+                TempData["ErrorMessage"] = Exceptions.EXC16;
+                return RedirectToAction("Index", "Admin");
             }
         }
 
