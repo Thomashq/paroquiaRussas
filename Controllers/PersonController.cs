@@ -23,6 +23,7 @@ namespace paroquiaRussas.Controllers
             _token = token;
         }
 
+        [Authorize]
         [HttpGet]
         public List<Person> GetAllPerson()
         {
@@ -52,7 +53,8 @@ namespace paroquiaRussas.Controllers
                 throw new Exception(string.Format(Exceptions.EXC11, id), ex);
             }
         }
-        
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Addperson(Person person)
         {
