@@ -1,22 +1,6 @@
 ﻿@model News
 
 <div class="my-3 text-dark text-start">
-    @if (TempData["ErrorMessage"] != null)
-    {
-        <div class="alert alert-danger text-start" role="alert">
-            @TempData["ErrorMessage"]
-            <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
-        </div>
-    }
-
-    @if (TempData["SucessMessage"] != null)
-    {
-        <div class="alert alert-success text-start" role="alert">
-            @TempData["SucessMessage"]
-            <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
-        </div>
-    }
-
     <form class="row g-2 align-content-start" asp-controller="News" asp-action="CreateNewNews" method="post">
         <div class="form-floating col-lg-12 my-2">
             <input type="text" class="form-control text-dark" id="titleInput" placeholder="Encontro de Casais" asp-for="NewsTitle" required>

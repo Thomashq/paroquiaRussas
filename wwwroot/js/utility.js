@@ -2,6 +2,7 @@
     changeTextToNavbarCards();
     createImageInBase64ForNews();
     createImageInBase64ForEvents();
+    changePageToNavbarCards();
 });
 
 function formatDate(dataString) {
@@ -39,6 +40,19 @@ function changeTextToNavbarCards() {
         $(this).addClass("active");
 
         clearAllFieldsFromAdmin(selectedTab);
+    });
+};
+
+//NAVBAR CARDS ADMIN (CRIAR E EDITAR)
+function changePageToNavbarCards() {
+    $(".nav-link-admin-page[data-nav-page='editar']").click(function () {
+        $(".pagina-admin-editar").show();
+        $(".pagina-admin-criar").hide();
+    });
+
+    $(".nav-link-admin-page[data-nav-page='criar']").click(function () {
+        $(".pagina-admin-editar").hide();
+        $(".pagina-admin-criar").show();
     });
 };
 

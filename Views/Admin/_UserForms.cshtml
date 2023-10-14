@@ -16,11 +16,11 @@
             <select asp-for="Role" asp-items="Html.GetEnumSelectList<Role>()" class="form-select text-dark" required style="padding: 0px 12px;"></select>
         </div>
         <div class="form-floating col-lg-6 my-2">
-            <input type="password" class="form-control text-dark" id="pwdInput" asp-for="Pwd" required></input>
+            <input type="password" class="form-control text-dark" id="pwdInput" asp-for="Pwd" required>
             <label for="pwdInput" class="text-dark">Escreva a Senha</label>
         </div>
         <div class="form-floating col-lg-6 my-2">
-            <input type="password" class="form-control text-dark" id="pwdRepeatInput" required></input>
+            <input type="password" class="form-control text-dark" id="pwdRepeatInput" required>
             <label for="pwdRepeatInput" class="text-dark">Reescreva a Senha</label>
         </div>
         <button type="submit" asp-controller="Person" asp-action="Addperson" class="col-md-2 btn-style mt-4" style="border-radius: 5px; border: none; height: 40px;">Enviar</button>
