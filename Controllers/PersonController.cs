@@ -5,6 +5,7 @@ using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Resources;
+using paroquiaRussas.Utility.Utilities;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -59,7 +60,7 @@ namespace paroquiaRussas.Controllers
             {
                 PersonRepository personRepository = new PersonRepository(_appDbContext);
 
-                if(ValidateExistingPerson(person, personRepository) == true)
+                if(PersonUtilities.ValidateExistingPerson(person, personRepository) == true)
                 {
                     TempData["ErrorMessage"] = Exceptions.EXC16;
                     return RedirectToAction("Index", "Admin");
@@ -98,16 +99,6 @@ namespace paroquiaRussas.Controllers
             {
                 throw new Exception(Exceptions.EXC17, ex);
             }
-        }
-
-        private bool ValidateExistingPerson(Person person, PersonRepository personRepository)
-        {
-            Person existingPerson = personRepository.GetPersonToLogin(person.Username, person.Pwd);
-
-            if (existingPerson != null)
-                return true;
-
-            return false;
         }
     }
 }
