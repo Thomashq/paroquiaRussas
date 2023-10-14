@@ -5,6 +5,7 @@ using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Resources;
+using paroquiaRussas.Utility.Utilities;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -53,20 +54,29 @@ namespace paroquiaRussas.Controllers
         
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Addperson(Person person)
+        public async Task<IActionResult> Addperson([FromForm] Person person)
         {
             try
             {
                 PersonRepository personRepository = new PersonRepository(_appDbContext);
+
+                if(PersonUtilities.ValidateExistingPerson(person, personRepository) == true)
+                {
+                    TempData["ErrorMessage"] = Exceptions.EXC16;
+                    return RedirectToAction("Index", "Admin");
+                }
+
                 personRepository.CreateNewPerson(person);
 
                 await _appDbContext.SaveChangesAsync();
 
-                return Ok(Messages.MSG08);
+                TempData["SucessMessage"] = Messages.MSG08;
+                return RedirectToAction("Index", "Admin");
             }
             catch (Exception ex)
             {
-                throw new Exception(Exceptions.EXC16, ex);
+                TempData["ErrorMessage"] = Exceptions.EXC16;
+                return RedirectToAction("Index", "Admin");
             }
         }
 

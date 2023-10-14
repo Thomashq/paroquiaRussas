@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace paroquiaRussas.Utility
 {
@@ -7,8 +8,10 @@ namespace paroquiaRussas.Utility
         public enum Role
         {
             [Description("Administrador")]
+            [Display(Name = "Administrador")]
             Admin = 0,
             [Description("Escritor")]
+            [Display(Name = "Escritor")]
             Writer = 1
         }
 
