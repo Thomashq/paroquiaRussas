@@ -43,7 +43,6 @@
                 <div class="card text-center">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
-
                             <li class="nav-item">
                                 <a class="nav-link nav-link-admin-page active text-dark" data-nav-page="editar" aria-current="true" href="#">Editar Conteúdo</a>
                             </li>
@@ -57,6 +56,18 @@
                     <div class="card-header pagina-admin-editar">
                         <div>
                             @await Html.PartialAsync("_MenuFormsAdmin")
+                        </div>
+
+                        <div class="card-body conteudo-noticias">
+                            @await Html.PartialAsync("_NewsListEdit")
+                        </div>
+
+                        <div class="card-body conteudo-eventos" style="display: none;">
+                            @await Html.PartialAsync("_EventsListEdit")
+                        </div>
+
+                        <div class="card-body conteudo-usuarios" style="display: none;">
+                            @await Html.PartialAsync("_UserListEdit")
                         </div>
                     </div>
 
@@ -75,10 +86,6 @@
 
                         <div class="card-body conteudo-usuarios" style="display: none;">
                             @await Html.PartialAsync("_UserForms")
-                        </div>
-
-                        <div class="card-body lista-noticias" style="display: none;">
-                            @await Html.PartialAsync("_NewsListEdit")
                         </div>
                     </div>
                 </div>
