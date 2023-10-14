@@ -56,25 +56,14 @@
 
                     <div class="card-header pagina-admin-editar">
                         <div>
-                            <h1>Editar</h1>
+                            @await Html.PartialAsync("_MenuFormsAdmin")
                         </div>
                     </div>
 
                     <div class="card-header pagina-admin-criar" style="display: none;">
-                        <ul class="nav nav-pills card-header-pills">
-
-                            <li class="nav-item col-md-4 col-6" style="cursor: pointer">
-                                <a class="nav-link nav-cards active fs-5" data-nav="noticias">Notícias</a>
-                            </li>
-
-                            <li class="nav-item col-md-4 col-6" style="cursor: pointer">
-                                <a class="nav-link nav-cards fs-5" data-nav="eventos">Eventos</a>
-                            </li>
-
-                            <li class="nav-item col-md-4 col-6" style="cursor: pointer">
-                                <a class="nav-link nav-cards fs-5" data-nav="usuarios">Usuários</a>
-                            </li>
-                        </ul>
+                        <div>
+                            @await Html.PartialAsync("_MenuFormsAdmin")
+                        </div>
 
                         <div class="card-body conteudo-noticias">
                             @await Html.PartialAsync("_NewsForms")
@@ -86,6 +75,10 @@
 
                         <div class="card-body conteudo-usuarios" style="display: none;">
                             @await Html.PartialAsync("_UserForms")
+                        </div>
+
+                        <div class="card-body lista-noticias" style="display: none;">
+                            @await Html.PartialAsync("_NewsListEdit")
                         </div>
                     </div>
                 </div>
