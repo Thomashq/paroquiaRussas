@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Área Administrativa";
     Layout = null;
+    @model AdminModel
 }
 
 <!DOCTYPE html>
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/paroquiaRussas.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -43,7 +45,6 @@
                 <div class="card text-center">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
-
                             <li class="nav-item">
                                 <a class="nav-link nav-link-admin-page active text-dark" data-nav-page="editar" aria-current="true" href="#">Editar Conteúdo</a>
                             </li>
@@ -56,36 +57,39 @@
 
                     <div class="card-header pagina-admin-editar">
                         <div>
-                            <h1>Editar</h1>
+                            @await Html.PartialAsync("_MenuFormsAdmin")
+                            <hr/>
+                        </div>
+
+                        <div class="card-body conteudo-noticias">
+                            @await Html.PartialAsync("_NewsListEdit", Model)
+                        </div>
+
+                        <div class="card-body conteudo-eventos" style="display: none;">
+                            @await Html.PartialAsync("_EventsListEdit", Model)
+                        </div>
+
+                        <div class="card-body conteudo-usuarios" style="display: none;">
+                            @await Html.PartialAsync("_UserListEdit", Model)
                         </div>
                     </div>
 
                     <div class="card-header pagina-admin-criar" style="display: none;">
-                        <ul class="nav nav-pills card-header-pills">
-
-                            <li class="nav-item col-md-4 col-6" style="cursor: pointer">
-                                <a class="nav-link nav-cards active fs-5" data-nav="noticias">Notícias</a>
-                            </li>
-
-                            <li class="nav-item col-md-4 col-6" style="cursor: pointer">
-                                <a class="nav-link nav-cards fs-5" data-nav="eventos">Eventos</a>
-                            </li>
-
-                            <li class="nav-item col-md-4 col-6" style="cursor: pointer">
-                                <a class="nav-link nav-cards fs-5" data-nav="usuarios">Usuários</a>
-                            </li>
-                        </ul>
+                        <div>
+                            @await Html.PartialAsync("_MenuFormsAdmin")
+                            <hr/>
+                        </div>
 
                         <div class="card-body conteudo-noticias">
-                            @await Html.PartialAsync("_NewsForms")
+                            @await Html.PartialAsync("_NewsForms", Model.News)
                         </div>
 
                         <div class="card-body conteudo-eventos" style="display: none;">
-                            @await Html.PartialAsync("_EventsForms")
+                            @await Html.PartialAsync("_EventsForms", Model.Event)
                         </div>
 
                         <div class="card-body conteudo-usuarios" style="display: none;">
-                            @await Html.PartialAsync("_UserForms")
+                            @await Html.PartialAsync("_UserForms", Model.Person)
                         </div>
                     </div>
                 </div>
@@ -96,5 +100,6 @@
     <script src="~/js/utility.js" asp-append-version="true"></script>
     <script src="~/js/admin.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

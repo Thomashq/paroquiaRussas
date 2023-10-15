@@ -1,0 +1,38 @@
+﻿@model AdminModel
+
+<table class="table call-data-table" id="user-table">
+    <thead>
+        <tr>
+            <th scope="col" class="text-dark">Usuário</th>
+            <th scope="col" class="text-dark">Data de Criação</th>
+            <th scope="col" class="text-dark text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model == null)
+            {
+                <tr>
+                    <td colspan="4">
+                        <strong>Por enquanto ainda não há usuários registrados.</strong>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (Person person in Model.PersonList)
+                {
+                    <tr>
+                        <td class="text-start">@person.Username</td>
+                        <td class="text-start">@person.CreationDate</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-danger" asp-controller="Person" asp-action="DeletePerson" asp-route-id=@person.Id>Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

@@ -65,6 +65,8 @@ namespace paroquiaRussas.Repository
                 PasswordEncryption passwordEncryption = new PasswordEncryption(person.Pwd);
                 person.Pwd = passwordEncryption.Encrypt(person.Pwd);
 
+                person.CreationDate = DateOnly.FromDateTime(DateTime.Now);
+
                 _appDbContext.Add(person);
 
                 return person;
