@@ -277,5 +277,16 @@ namespace paroquiaRussas.Utility.Resources {
                 return ResourceManager.GetString("EXC23", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Não foi possível carregar a lista de conteúdo. Tente novamente mais tarde..
+        /// </summary>
+        public static string EXC25
+        {
+            get
+            {
+                return ResourceManager.GetString("EXC25", resourceCulture);
+            }
+        }
     }
 }

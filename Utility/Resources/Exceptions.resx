@@ -189,4 +189,7 @@
   <data name="EXC24" xml:space="preserve">
     <value>Erro ao salvar imagem.</value>
   </data>
+  <data name="EXC25" xml:space="preserve">
+    <value>Não foi possível carregar a lista de conteúdo. Tente novamente mais tarde.</value>
+  </data>
 </root>
