@@ -27,8 +27,8 @@
                         <td class="text-start">@events.EventDate</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a role="button" class="btn btn-primary" asp-controller="Events" asp-action="EditEvent" asp-route-id=@events.Id>Editar</a>
-                                <a role="button" class="btn btn-danger" asp-controller="Events" asp-action="DeleteEvent" asp-route-id=@events.Id>Excluir</a>
+                                <a role="button" class="btn btn-primary events-edit" data-id=@events.Id>Editar</a>
+                                <a role="button" class="btn btn-danger events-delete" data-id=@events.Id>Excluir</a>
                             </div>
                         </td>
                     </tr>

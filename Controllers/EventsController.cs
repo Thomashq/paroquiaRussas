@@ -119,24 +119,25 @@ namespace paroquiaRussas.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Event>> DeleteEvent(long id)
+        [HttpDelete("DeleteEvent/{id}")]
+        public IActionResult DeleteEvent(int id)
         {
             try
             {
                 EventsRepository eventsRepository = new EventsRepository(_appDbContext);
+
                 Event eventToDelete = eventsRepository.DeleteEventById(id);
 
                 if (eventToDelete == null)
-                    return NotFound();
+                    return Json(new { error = Exceptions.EXC06 });
 
-                await _appDbContext.SaveChangesAsync();
+                _appDbContext.SaveChangesAsync();
 
-                return Ok(Messages.MSG03);
+                return Json(new { message = Messages.MSG03 });
             }
             catch (Exception ex)
             {
-                throw new Exception(Exceptions.EXC06, ex);
+                return Json(new { error = Exceptions.EXC06 });
             }
         }
     }

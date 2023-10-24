@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     validateEqualityOfPasswordFields();
     deleteNews();
+    deleteEvents();
 });
 
 function clearAllFieldsFromAdmin(conteudo) {
@@ -43,6 +44,30 @@ function deleteNews() {
         var newsId = $(this).data("id");
         $.ajax({
             url: "/api/News/DeleteNews/" + newsId,
+            method: "DELETE",
+            success: function (data) {
+                if (data.message) {
+                    createPopupSuccess(data.message);
+                    location.reload();
+                }
+                else if (data.error)
+                    createPopupError(data.error);
+            },
+            error: function (data) {
+                createPopupError(data.message);
+            }
+        });
+
+        return false;
+    });
+}
+
+//EVENTS
+function deleteEvents() {
+    $(".events-delete").click(function () {
+        var newsId = $(this).data("id");
+        $.ajax({
+            url: "/api/Events/DeleteEvent/" + newsId,
             method: "DELETE",
             success: function (data) {
                 if (data.message) {
