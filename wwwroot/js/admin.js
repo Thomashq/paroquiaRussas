@@ -1,8 +1,9 @@
 ﻿$(document).ready(function () {
     validateEqualityOfPasswordFields();
-    deleteNews();
-    deleteEvents();
-    personEvents();
+
+    deleteEntity("news", "News");
+    deleteEntity("events", "Event");
+    deleteEntity("person", "Person");
 });
 
 function clearAllFieldsFromAdmin(conteudo) {
@@ -39,68 +40,19 @@ function validateEqualityOfPasswordFields() {
     });
 }
 
-//NEWS
-function deleteNews() {
-    $(".news-delete").click(function () {
-        var newsId = $(this).data("id");
+function deleteEntity(entityType, entityDelete) {
+    $("." + entityType + "-delete").click(function () {
+        var entityId = $(this).data("id");
         $.ajax({
-            url: "/api/News/DeleteNews/" + newsId,
+            url: "/api/" + entityType + "/Delete" + entityDelete + "/" + entityId,
             method: "DELETE",
             success: function (data) {
                 if (data.message) {
                     createPopupSuccess(data.message);
                     location.reload();
-                }
-                else if (data.error)
+                } else if (data.error) {
                     createPopupError(data.error);
-            },
-            error: function (data) {
-                createPopupError(data.message);
-            }
-        });
-
-        return false;
-    });
-}
-
-//EVENTS
-function deleteEvents() {
-    $(".events-delete").click(function () {
-        var personId = $(this).data("id");
-        $.ajax({
-            url: "/api/Events/DeleteEvent/" + personId,
-            method: "DELETE",
-            success: function (data) {
-                if (data.message) {
-                    createPopupSuccess(data.message);
-                    location.reload();
                 }
-                else if (data.error)
-                    createPopupError(data.error);
-            },
-            error: function (data) {
-                createPopupError(data.message);
-            }
-        });
-
-        return false;
-    });
-}
-
-//PERSONS
-function personEvents() {
-    $(".person-delete").click(function () {
-        var userId = $(this).data("id");
-        $.ajax({
-            url: "/api/Person/DeletePerson/" + userId,
-            method: "DELETE",
-            success: function (data) {
-                if (data.message) {
-                    createPopupSuccess(data.message);
-                    location.reload();
-                }
-                else if (data.error)
-                    createPopupError(data.error);
             },
             error: function (data) {
                 createPopupError(data.message);
