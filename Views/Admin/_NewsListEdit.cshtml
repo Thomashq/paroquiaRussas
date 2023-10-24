@@ -1,5 +1,15 @@
 ﻿@model AdminModel
 
+<div class="container text-start alert alert-danger fixed-top w-50" id="error-message-div" style="display: none; margin: 0 auto; margin-top: 60px;">
+    <span id="error-message"></span>
+    <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+</div>
+
+<div class="container text-start alert alert-success fixed-top w-50" id="success-message-div" style="display: none; margin: 0 auto; margin-top: 60px;">
+    <span id="success-message"></span>
+    <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+</div>
+
 <table class="table call-data-table" id="news-table">
     <thead>
         <tr>
@@ -27,8 +37,8 @@
                         <td class="text-start">@news.CreationDate</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a role="button" class="btn btn-primary" asp-controller="News" asp-action="UpdateNews" asp-route-id=@news.Id>Editar</a>
-                                <a role="button" class="btn btn-danger" asp-controller="News" asp-action="DeleteNews" asp-route-id=@news.Id>Excluir</a>
+                                <a role="button" class="btn btn-primary news-edit" data-id="@news.Id">Editar</a>
+                                <a role="button" class="btn btn-danger news-delete" data-id="@news.Id">Excluir</a>
                             </div>
                         </td>
                     </tr>

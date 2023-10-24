@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     validateEqualityOfPasswordFields();
+    deleteNews();
 });
 
 function clearAllFieldsFromAdmin(conteudo) {
@@ -33,5 +34,29 @@ function validateEqualityOfPasswordFields() {
             createPopupError('As senhas não coincidem.');
             e.preventDefault();
         }
+    });
+}
+
+//NEWS
+function deleteNews() {
+    $(".news-delete").click(function () {
+        var newsId = $(this).data("id");
+        $.ajax({
+            url: "/api/News/DeleteNews/" + newsId,
+            method: "DELETE",
+            success: function (data) {
+                if (data.message) {
+                    createPopupSuccess(data.message);
+                    location.reload();
+                }
+                else if (data.error)
+                    createPopupError(data.error);
+            },
+            error: function (data) {
+                createPopupError(data.message);
+            }
+        });
+
+        return false;
     });
 }
