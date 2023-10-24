@@ -100,24 +100,25 @@ namespace paroquiaRussas.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<News>> DeleteNews(long id)
+        [HttpDelete("DeleteNews/{id}")]
+        public IActionResult DeleteNews(long id)
         {
             try
             {
                 NewsRepository newsRepository = new NewsRepository(_appDbContext);
+
                 News newsToDelete = newsRepository.DeleteNews(id);
 
                 if (newsToDelete == null)
-                    return NotFound(string.Format(Exceptions.EXC11, id));
+                    return Json(new { error = Exceptions.EXC14 });
 
                 _appDbContext.SaveChangesAsync();
 
-                return Ok(Messages.MSG07);
+                return Json(new { message = Messages.MSG07 });
             }
             catch (Exception ex)
             {
-                throw new Exception(Exceptions.EXC14, ex);
+                return Json(new { error = Exceptions.EXC14 });
             }
         }
 
@@ -132,7 +133,7 @@ namespace paroquiaRussas.Controllers
 
                 return Json(new { data = news });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(new { error = Messages.MSG13 });
             }

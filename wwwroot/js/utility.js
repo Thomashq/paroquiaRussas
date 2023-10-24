@@ -25,6 +25,17 @@ function createPopupError(message) {
     }, 4000);
 }
 
+function createPopupSuccess(message) {
+    var successMessageDiv = $("#success-message-div");
+
+    $("#success-message").text(message);
+    successMessageDiv.show();
+
+    setTimeout(function () {
+        successMessageDiv.fadeOut();
+    }, 4000);
+}
+
 $(".close-alert").click(function () {
     $('.alert').hide('hide');
 });

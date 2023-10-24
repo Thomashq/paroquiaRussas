@@ -51,7 +51,7 @@ namespace paroquiaRussas.Controllers
                 throw new Exception(string.Format(Exceptions.EXC11, id), ex);
             }
         }
-        
+
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Addperson([FromForm] Person person)
@@ -60,7 +60,7 @@ namespace paroquiaRussas.Controllers
             {
                 PersonRepository personRepository = new PersonRepository(_appDbContext);
 
-                if(PersonUtilities.ValidateExistingPerson(person, personRepository) == true)
+                if (PersonUtilities.ValidateExistingPerson(person, personRepository) == true)
                 {
                     TempData["ErrorMessage"] = Exceptions.EXC16;
                     return RedirectToAction("Index", "Admin");
@@ -80,24 +80,25 @@ namespace paroquiaRussas.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePerson(long id)
+        [HttpDelete("DeletePerson/{id}")]
+        public IActionResult DeletePerson(int id)
         {
             try
             {
                 PersonRepository personRepository = new PersonRepository(_appDbContext);
+                
                 var result = personRepository.DeletePerson(id);
 
                 if (result == null)
-                    return NotFound(string.Format(Exceptions.EXC11, id));
+                    return Json(new { error = Exceptions.EXC17 });
 
-                await _appDbContext.SaveChangesAsync();
+                _appDbContext.SaveChangesAsync();
 
-                return Ok(Messages.MSG09);
+                return Json(new { message = Messages.MSG09 });
             }
             catch (Exception ex)
             {
-                throw new Exception(Exceptions.EXC17, ex);
+                return Json(new { error = Exceptions.EXC17 });
             }
         }
     }
