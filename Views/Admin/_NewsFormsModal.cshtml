@@ -1,0 +1,29 @@
+﻿@model News
+
+<div id="news-forms-modal" class="modal fade text-start text-dark" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="my-3 text-dark text-start modal-content p-4">
+            <form class="row g-2 align-content-start" asp-controller="News" asp-action="UpdateNews" method="post">
+                <div class="form-floating col-lg-12 my-2">
+                    <input type="text" class="form-control text-dark" id="titleInputModal" placeholder="Encontro de Casais" asp-for="NewsTitle" required>
+                    <label for="titleInputModal" class="text-dark">Escreva o Título da Notícia</label>
+                </div>
+                <div class="form-floating col-lg-12 my-2">
+                    <input type="text" class="form-control text-dark" id="headlineInputModal" placeholder="Retiro Espiritual de Setembro" asp-for="Headline" required>
+                    <label for="headlineInputModal" class="text-dark">Escreva a Manchete da Notícia</label>
+                </div>
+                <div class="form-floating col-lg-12 my-2">
+                    <textarea class="form-control text-dark" id="contentInputModal" asp-for="NewsContent" required></textarea>
+                    <label for="contentInputModal" class="text-dark">Escreva a Notícia</label>
+                </div>
+                <div class="">
+                    <label for="formFileSm" class="form-label">Escolha Imagem da Notícia</label>
+                    <input class="form-control form-control-sm" id="formFileSmModal" type="file">
+                    <input class="form-control form-control-sm" id="newsImageBase64Modal" asp-for="NewsImage" type="text" hidden>
+                </div>
+
+                <button type="submit" asp-controller="News" asp-action="UpdateNews" class="col-md-2 btn-style mt-4" style="border-radius: 5px; border: none; height: 40px;">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>

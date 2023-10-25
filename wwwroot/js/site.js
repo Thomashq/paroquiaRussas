@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
     changeTextToNavbarCards();
-    openModalNews();
 });
 
 //filtros
@@ -53,30 +52,6 @@ $(document).ready(function () {
         }
     });
 });
-
-//MODAL NOTICIAS
-function openModalNews() {
-    $(".link-news").click(function () {
-        var newsId = $(this).data("id");
-        $.ajax({
-            url: "/api/News/View/" + newsId,
-            method: "GET",
-            success: function (data) {
-                if (data.error) {
-                    createPopupError(data.error)
-                } else {
-                    $("#modal").modal('show');
-                    fillsModalFields(data.data);
-                }
-            },
-            error: function () {
-                createPopupError()
-            }
-        });
-
-        return false;
-    });
-}
 
 function fillsModalFields(data) {
     var content = data.newsContent.replace(/\\n\\n/g, "<br>");
