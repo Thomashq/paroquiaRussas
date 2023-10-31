@@ -2,6 +2,7 @@
     changeTextToNavbarCards();
     createImageInBase64ForNews();
     createImageInBase64ForEvents();
+    createImageInBase64ForNewsModal();
     changePageToNavbarCards();
     openModalNews();
 });
@@ -79,6 +80,24 @@ function createImageInBase64ForNews() {
             reader.onload = function (e) {
                 var base64Value = file.name + ',' + e.target.result;
                 $('#newsImageBase64').val(base64Value);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+function createImageInBase64ForNewsModal() {
+    $('#formFileSmModal').change(function () {
+        var input = this;
+        var file = input.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var base64Value = file.name + ',' + e.target.result;
+                $('#newsImageBase64Modal').val(base64Value);
             };
 
             reader.readAsDataURL(file);

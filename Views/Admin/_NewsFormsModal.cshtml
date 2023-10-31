@@ -16,11 +16,13 @@
                     <textarea class="form-control text-dark" id="contentInputModal" asp-for="NewsContent" required></textarea>
                     <label for="contentInputModal" class="text-dark">Escreva a Notícia</label>
                 </div>
-                <div class="">
-                    <label for="formFileSm" class="form-label">Escolha Imagem da Notícia</label>
+                <div>
+                    <label for="formFileSmModal" class="form-label">Escolha Imagem da Notícia</label>
                     <input class="form-control form-control-sm" id="formFileSmModal" type="file">
                     <input class="form-control form-control-sm" id="newsImageBase64Modal" asp-for="NewsImage" type="text" hidden>
                 </div>
+
+                <input id="idInputModal" type="text" asp-for="Id" hidden>
 
                 <button type="submit" asp-controller="News" asp-action="UpdateNews" class="col-md-2 btn-style mt-4" style="border-radius: 5px; border: none; height: 40px;">Enviar</button>
             </form>

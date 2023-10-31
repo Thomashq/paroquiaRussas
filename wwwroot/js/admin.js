@@ -127,4 +127,5 @@ function fillNewsFormsModal(data) {
     $("#headlineInputModal").val(data.data.headline);
     $("#contentInputModal").val(data.data.newsContent);
     $("#newsImageBase64Modal").val(data.data.newsImage);
+    $("#idInputModal").val(data.data.id);
 }
