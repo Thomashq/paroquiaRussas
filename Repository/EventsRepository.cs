@@ -78,9 +78,10 @@ namespace paroquiaRussas.Repository
                     return null; // Retorna 404 caso o evento não seja encontrado
 
                 if (eventUpdate.EventDate != null)
-                    eventToEdit.EventDate = eventUpdate.EventDate;
-                
-                if(eventUpdate.EventTime != null)
+                    if (DateTime.TryParseExact(eventUpdate.EventDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime data))
+                        eventToEdit.EventDate = data.ToString("dd/MM/yyyy");
+
+                if (eventUpdate.EventTime != null)
                     eventToEdit.EventTime = eventUpdate.EventTime;
 
                 if (!string.IsNullOrEmpty(eventUpdate.EventDescription))
@@ -89,8 +90,8 @@ namespace paroquiaRussas.Repository
                 if (!string.IsNullOrEmpty(eventUpdate.EventAddress))
                     eventToEdit.EventAddress = eventUpdate.EventAddress;
 
-                if (!string.IsNullOrEmpty(eventUpdate.EventImage))
-                    eventToEdit.EventImage = eventUpdate.EventImage;
+                if (!string.IsNullOrEmpty(eventUpdate.EventImage) && eventUpdate.EventImage != eventToEdit.EventImage)
+                    eventToEdit.EventImage = ImagesManagement.SaveImage(eventUpdate.EventImage);
 
                 if (!string.IsNullOrEmpty(eventUpdate.EventName))
                     eventToEdit.EventName = eventUpdate.EventName;

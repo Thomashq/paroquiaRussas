@@ -2,6 +2,7 @@
     validateEqualityOfPasswordFields();
     createTableToAdmin();
     openModalNewsToUpdate();
+    openModalEventToUpdate();
 
     deleteEntity("news", "News");
     deleteEntity("events", "Event");
@@ -122,10 +123,45 @@ function openModalNewsToUpdate() {
     });
 }
 
+//MODAL NOTICIAS
+function openModalEventToUpdate() {
+    $(".events-edit").click(function () {
+        var eventId = $(this).data("id");
+        $.ajax({
+            url: "/api/Events/View/" + eventId,
+            method: "GET",
+            success: function (data) {
+                if (data.error) {
+                    createPopupError(data.error)
+                } else {
+                    fillEventsFormsModal(data);
+
+                    $("#events-forms-modal").modal('show');
+                }
+            },
+            error: function () {
+                createPopupError()
+            }
+        });
+
+        return false;
+    });
+}
+
 function fillNewsFormsModal(data) {
     $("#titleInputModal").val(data.data.newsTitle);
     $("#headlineInputModal").val(data.data.headline);
     $("#contentInputModal").val(data.data.newsContent);
     $("#newsImageBase64Modal").val(data.data.newsImage);
     $("#idInputModal").val(data.data.id);
+}
+
+function fillEventsFormsModal(data) {
+    $("#nameInputModal").val(data.data.eventName);
+    $("#descriptionInputModal").val(data.data.eventDescription);
+    $("#addressInputModal").val(data.data.eventAddress);
+    $("#dateInputModal").val(data.data.eventDate);
+    $("#timeInputModal").val(data.data.eventTime);
+    $("#idInputEventModal").val(data.data.id);
+    $("#eventsImageBase64Modal").val(data.data.eventImage);
 }

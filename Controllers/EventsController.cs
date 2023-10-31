@@ -39,15 +39,12 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Event> GetEventById(int id)
+        public Event GetEventById(long id)
         {
             try
             {
                 EventsRepository eventsRepository = new EventsRepository(_appDbContext);
                 Event eventToGet = eventsRepository.GetEventById(id);
-
-                if (eventToGet == null)
-                    return NotFound();
 
                 return eventsRepository.GetEventById(id);
             }
@@ -78,7 +75,7 @@ namespace paroquiaRussas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEvent([FromForm]  Event eventToPost)
+        public async Task<IActionResult> AddEvent([FromForm] Event eventToPost)
         {
             try
             {
@@ -98,8 +95,8 @@ namespace paroquiaRussas.Controllers
         }
 
 
-        [HttpPut]
-        public IActionResult EditEvent(Event eventUpdate)
+        [HttpPost("EditEvent")]
+        public IActionResult EditEvent([FromForm] Event eventUpdate)
         {
             try
             {
@@ -107,15 +104,17 @@ namespace paroquiaRussas.Controllers
                 Event eventToEdit = eventRepository.UpdateEvent(eventUpdate);
 
                 if (eventToEdit == null)
-                    return NotFound();
+                    throw new Exception();
 
                 _appDbContext.SaveChanges();
 
-                return Ok(Messages.MSG02);
+                TempData["SucessMessage"] = Messages.MSG02;
+                return RedirectToAction("Index", "Admin");
             }
             catch (Exception ex)
             {
-                throw new Exception(Exceptions.EXC05, ex);
+                TempData["ErrorMessage"] = Exceptions.EXC05;
+                return RedirectToAction("Index", "Admin");
             }
         }
 
@@ -138,6 +137,23 @@ namespace paroquiaRussas.Controllers
             catch (Exception ex)
             {
                 return Json(new { error = Exceptions.EXC06 });
+            }
+        }
+
+        [Route("View/{id}")]
+        public IActionResult OpenModalEvent(int id)
+        {
+            try
+            {
+                Event events = new Event();
+
+                events = GetEventById(id);
+
+                return Json(new { data = events });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = Exceptions.EXC26 });
             }
         }
     }

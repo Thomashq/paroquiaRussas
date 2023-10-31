@@ -1,0 +1,39 @@
+﻿@model Event
+
+<div id="events-forms-modal" class="modal fade text-start text-dark" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="my-3 text-dark text-start modal-content p-4">
+            <form class="row g-2 align-content-start" asp-controller="Events" asp-action="EditEvent" method="post">
+                <div class="form-floating col-lg-12 my-2">
+                    <input type="text" class="form-control text-dark" id="nameInputModal" placeholder="Encontro de Casais" asp-for="EventName" required>
+                    <label for="nameInputModal" class="text-dark">Escreva o Nome do Evento</label>
+                </div>
+                <div class="form-floating col-lg-12 my-2">
+                    <textarea class="form-control text-dark" id="descriptionInputModal" asp-for="EventDescription" required></textarea>
+                    <label for="descriptionInputModal" class="text-dark">Escreva a Descrição do Evento</label>
+                </div>
+                <div class="form-floating col-lg-12 my-2">
+                    <input type="text" class="form-control text-dark" id="addressInputModal" placeholder="Av. Dom Lino, 923-981 - Centro, Russas - CE, 62900-000" asp-for="EventAddress" required>
+                    <label for="addressInputModal" class="text-dark">Escreva o Endereço do Evento</label>
+                </div>
+                <div class="form-floating col-lg-6 my-2">
+                    <input type="date" class="form-control text-dark" id="dateInputModal" asp-for="EventDate" required>
+                    <label for="dateInputModal" class="text-dark">Data do Evento</label>
+                </div>
+                <div class="form-floating col-lg-6 my-2">
+                    <input type="time" class="form-control text-dark" id="timeInputModal" asp-for="EventTime" required>
+                    <label for="timeInputModal" class="text-dark">Horário do Evento</label>
+                </div>
+                <div class="">
+                    <label for="formEventsFileSmModal" class="form-label">Escolha Imagem do Evento</label>
+                    <input class="form-control form-control-sm" id="formEventsFileSmModal" type="file">
+                    <input class="form-control form-control-sm" id="eventsImageBase64Modal" type="text" asp-for="EventImage" hidden>
+                </div>
+
+                <input id="idInputEventModal" type="text" asp-for="Id" hidden>
+
+                <button type="submit" asp-controller="Events" asp-action="EditEvent" class="col-md-2 btn-style mt-4" style="border-radius: 5px; border: none; height: 40px;">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
