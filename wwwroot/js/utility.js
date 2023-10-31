@@ -1,12 +1,19 @@
 ﻿$(document).ready(function () {
     changeTextToNavbarCards();
-    createImageInBase64ForNews();
-    createImageInBase64ForEvents();
-    createImageInBase64ForEventModal();
-    createImageInBase64ForNewsModal();
     changePageToNavbarCards();
     openModalNews();
+    createImageInBase64ForAdmin();
 });
+
+function createImageInBase64ForAdmin() {
+    // Usage for news
+    createImageInBase64('#formFileSm', '#newsImageBase64');
+    createImageInBase64('#formFileSmModal', '#newsImageBase64Modal');
+
+    // Usage for events
+    createImageInBase64('#formEventsFileSm', '#eventsImageBase64');
+    createImageInBase64('#formEventsFileSmModal', '#eventsImageBase64Modal');
+}
 
 function formatDate(dataString) {
     const data = new Date(dataString + "T00:00:00");
@@ -70,8 +77,8 @@ function changePageToNavbarCards() {
     });
 };
 
-function createImageInBase64ForNews() {
-    $('#formFileSm').change(function () {
+function createImageInBase64(inputSelector, base64OutputSelector) {
+    $(inputSelector).change(function () {
         var input = this;
         var file = input.files[0];
 
@@ -80,61 +87,7 @@ function createImageInBase64ForNews() {
 
             reader.onload = function (e) {
                 var base64Value = file.name + ',' + e.target.result;
-                $('#newsImageBase64').val(base64Value);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    });
-}
-
-function createImageInBase64ForNewsModal() {
-    $('#formFileSmModal').change(function () {
-        var input = this;
-        var file = input.files[0];
-
-        if (file) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var base64Value = file.name + ',' + e.target.result;
-                $('#newsImageBase64Modal').val(base64Value);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    });
-}
-
-function createImageInBase64ForEvents() {
-    $('#formEventsFileSm').change(function () {
-        var input = this;
-        var file = input.files[0];
-
-        if (file) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var base64Value = file.name + ',' + e.target.result;
-                $('#eventsImageBase64').val(base64Value);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    });
-}
-
-function createImageInBase64ForEventModal() {
-    $('#formEventsFileSmModal').change(function () {
-        var input = this;
-        var file = input.files[0];
-
-        if (file) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var base64Value = file.name + ',' + e.target.result;
-                $('#eventsImageBase64Modal').val(base64Value);
+                $(base64OutputSelector).val(base64Value);
             };
 
             reader.readAsDataURL(file);
