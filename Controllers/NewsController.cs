@@ -78,8 +78,8 @@ namespace paroquiaRussas.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult UpdateNews(News news)
+        [HttpPost("UpdateNews")]
+        public IActionResult UpdateNews([FromForm] News news)
         {
             try
             {
@@ -88,15 +88,17 @@ namespace paroquiaRussas.Controllers
                 News newsToEdit = newsRepository.UpdateNews(news);
 
                 if (newsToEdit == null)
-                    return NotFound(string.Format(Exceptions.EXC11, news.Id));
+                    throw new Exception();
 
                 _appDbContext.SaveChanges();
 
-                return Ok(Messages.MSG06);
+                TempData["SucessMessage"] = Messages.MSG06;
+                return RedirectToAction("Index", "Admin");
             }
             catch (Exception ex)
             {
-                throw new Exception(Exceptions.EXC13, ex);
+                TempData["ErrorMessage"] = Exceptions.EXC13;
+                return RedirectToAction("Index", "Admin");
             }
         }
 

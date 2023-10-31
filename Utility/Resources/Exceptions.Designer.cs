@@ -288,5 +288,16 @@ namespace paroquiaRussas.Utility.Resources {
                 return ResourceManager.GetString("EXC25", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Ocorreu um erro ao carregar o evento..
+        /// </summary>
+        public static string EXC26
+        {
+            get
+            {
+                return ResourceManager.GetString("EXC26", resourceCulture);
+            }
+        }
     }
 }

@@ -1,10 +1,19 @@
 ﻿$(document).ready(function () {
     changeTextToNavbarCards();
-    createImageInBase64ForNews();
-    createImageInBase64ForEvents();
     changePageToNavbarCards();
-    createTableToAdmin();
+    openModalNews();
+    createImageInBase64ForAdmin();
 });
+
+function createImageInBase64ForAdmin() {
+    // Usage for news
+    createImageInBase64('#formFileSm', '#newsImageBase64');
+    createImageInBase64('#formFileSmModal', '#newsImageBase64Modal');
+
+    // Usage for events
+    createImageInBase64('#formEventsFileSm', '#eventsImageBase64');
+    createImageInBase64('#formEventsFileSmModal', '#eventsImageBase64Modal');
+}
 
 function formatDate(dataString) {
     const data = new Date(dataString + "T00:00:00");
@@ -68,8 +77,8 @@ function changePageToNavbarCards() {
     });
 };
 
-function createImageInBase64ForNews() {
-    $('#formFileSm').change(function () {
+function createImageInBase64(inputSelector, base64OutputSelector) {
+    $(inputSelector).change(function () {
         var input = this;
         var file = input.files[0];
 
@@ -78,7 +87,7 @@ function createImageInBase64ForNews() {
 
             reader.onload = function (e) {
                 var base64Value = file.name + ',' + e.target.result;
-                $('#newsImageBase64').val(base64Value);
+                $(base64OutputSelector).val(base64Value);
             };
 
             reader.readAsDataURL(file);
@@ -86,51 +95,26 @@ function createImageInBase64ForNews() {
     });
 }
 
-function createImageInBase64ForEvents() {
-    $('#formEventsFileSm').change(function () {
-        var input = this;
-        var file = input.files[0];
-
-        if (file) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var base64Value = file.name + ',' + e.target.result;
-                $('#eventsImageBase64').val(base64Value);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    });
-}
-
-function createTableToAdmin() {
-    $('.call-data-table').DataTable({
-        "ordering": true,
-        "paging": true,
-        "searching": true,
-        "oLanguage": {
-            "sEmptyTable": "Nenhum registro encontrado na tabela",
-            "sInfo": "Mostrar _START_ até _END_ de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrar 0 até 0 de 0 Registros",
-            "sInfoFiltered": "(Filtrar de _MAX_ total registros)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ".",
-            "sLengthMenu": "Mostrar _MENU_ registros por pagina",
-            "sLoadingRecords": "Carregando...",
-            "sProcessing": "Processando...",
-            "sZeroRecords": "Nenhum registro encontrado",
-            "sSearch": "Pesquisar",
-            "oPaginate": {
-                "sNext": "Proximo",
-                "sPrevious": "Anterior",
-                "sFirst": "Primeiro",
-                "sLast": "Ultimo"
+//MODAL NOTICIAS
+function openModalNews() {
+    $(".link-news").click(function () {
+        var newsId = $(this).data("id");
+        $.ajax({
+            url: "/api/News/View/" + newsId,
+            method: "GET",
+            success: function (data) {
+                if (data.error) {
+                    createPopupError(data.error)
+                } else {
+                    $("#modal").modal('show');
+                    fillsModalFields(data.data);
+                }
             },
-            "oAria": {
-                "sSortAscending": ": Ordenar colunas de forma ascendente",
-                "sSortDescending": ": Ordenar colunas de forma descendente"
+            error: function () {
+                createPopupError()
             }
-        }
+        });
+
+        return false;
     });
 }

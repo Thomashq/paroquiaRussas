@@ -192,4 +192,7 @@
   <data name="EXC25" xml:space="preserve">
     <value>Não foi possível carregar a lista de conteúdo. Tente novamente mais tarde.</value>
   </data>
+  <data name="EXC26" xml:space="preserve">
+    <value>Ocorreu um erro ao carregar o evento.</value>
+  </data>
 </root>

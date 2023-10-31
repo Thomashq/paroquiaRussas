@@ -70,7 +70,9 @@ namespace paroquiaRussas.Repository
                 newsToEdit.NewsTitle = news.NewsTitle ?? newsToEdit.NewsTitle;
                 newsToEdit.Headline = news.Headline ?? newsToEdit.Headline;
                 newsToEdit.NewsContent = news.NewsContent ?? newsToEdit.NewsContent;
-                newsToEdit.NewsImage = news.NewsImage ?? newsToEdit.NewsImage;
+
+                if(news.NewsImage != newsToEdit.NewsImage)
+                    newsToEdit.NewsImage = ImagesManagement.SaveImage(news.NewsImage)  ?? newsToEdit.NewsImage;
 
                 _appDbContext.News.Update(newsToEdit);
 
