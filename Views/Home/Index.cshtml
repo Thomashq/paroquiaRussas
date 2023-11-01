@@ -68,11 +68,11 @@
                 {
                     foreach (News newsCard in Model.News)
                     {
-                        <div class="card card-news col-lg-4">
-                            <img class="card-img-top" src="@newsCard.NewsImage" alt="@newsCard.Headline">
+                        <div class="card card-news col-lg-4 link-news" data-target="#modal-@newsCard.Id" data-id="@newsCard.Id">
+                            <img class="card-img-top" src="@newsCard.NewsImage" alt="@newsCard.Headline" style="height: 15rem; object-fit: fill">
                             <div class="card-body">
                                 <h5 class="card-title text-dark">
-                                    <a class="link-news" data-target="#modal-@newsCard.Id" data-id="@newsCard.Id">@newsCard.NewsTitle</a>
+                                    <a>@newsCard.NewsTitle</a>
                                 </h5>
                                 <p class="card-text text-dark">@newsCard.Headline</p>
                                 <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @newsCard.CreationDate.ToString("dd/MM/yyyy")</small></p>

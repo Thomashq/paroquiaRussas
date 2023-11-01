@@ -52,7 +52,7 @@ namespace paroquiaRussas.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<IActionResult> Addperson([FromForm] Person person)
         {

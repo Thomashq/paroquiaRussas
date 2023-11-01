@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
@@ -15,6 +16,7 @@ namespace paroquiaRussas.Controllers
             _appDbContext = appDbContext;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             try
