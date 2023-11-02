@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
+using paroquiaRussas.Services;
 using paroquiaRussas.Utility;
-using paroquiaRussas.Utility.Interfaces;
 using paroquiaRussas.Utility.Resources;
 using System.Security.Claims;
 using Enum = paroquiaRussas.Utility.Enum;
@@ -15,9 +15,9 @@ namespace paroquiaRussas.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly IConfiguration _configuration;
-        private readonly IToken _token;
+        private readonly TokenServices _token;
 
-        public LoginController(AppDbContext appDbContext, IConfiguration configuration, IToken token)
+        public LoginController(AppDbContext appDbContext, IConfiguration configuration, TokenServices token)
         {
             _appDbContext = appDbContext;
             _configuration = configuration;

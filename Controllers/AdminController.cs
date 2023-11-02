@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using paroquiaRussas.Filters;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
@@ -16,7 +16,7 @@ namespace paroquiaRussas.Controllers
             _appDbContext = appDbContext;
         }
 
-        [Authorize]
+        [ServiceFilter(typeof(AdminAuthorizationAttribute))]
         public IActionResult Index()
         {
             try

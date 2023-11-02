@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using paroquiaRussas.Filters;
 using paroquiaRussas.Services;
 using paroquiaRussas.Utility;
 using paroquiaRussas.Utility.Interfaces;
@@ -18,7 +19,6 @@ builder.Services.AddControllers();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IEmail, MailServices>();
-builder.Services.AddScoped<IToken, TokenServices>();
 
 LiturgyApiConfig liturgyApiConfig = new();
 
@@ -60,6 +60,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("conn"));
 });
+
+builder.Services.AddScoped<TokenServices>();
+builder.Services.AddScoped<AdminAuthorizationAttribute>();
 
 var app = builder.Build();
 
