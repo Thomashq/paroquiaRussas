@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using paroquiaRussas.Services;
+using paroquiaRussas.Utility.Resources;
 using System.Security.Claims;
 
 namespace paroquiaRussas.Filters
@@ -24,7 +25,7 @@ namespace paroquiaRussas.Filters
                 ClaimsPrincipal claimsPrincipal = _tokenServices.GetPrincipalFromExpiredToken(token);
 
                 if (claimsPrincipal == null)
-                    throw new Exception();
+                    throw new Exception(Exceptions.EXC28);
             }
             catch (Exception ex)
             {
@@ -34,10 +35,12 @@ namespace paroquiaRussas.Filters
 
         private static string GetTokenFromRequest(AuthorizationFilterContext context)
         {
-            string token = context.HttpContext.Request.Cookies["token_auth"].ToString();
+            var cookies = context.HttpContext.Request.Cookies["token_auth"];
 
-            if (string.IsNullOrEmpty(token))
-                throw new Exception();
+            if (cookies == null)
+                throw new Exception(Exceptions.EXC27);
+
+            string? token = cookies.ToString();
 
             return token;
         }

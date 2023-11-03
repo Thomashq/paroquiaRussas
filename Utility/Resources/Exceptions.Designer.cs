@@ -59,7 +59,7 @@ namespace paroquiaRussas.Utility.Resources {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possível enviar o email. Por favor tente novamente mais tarde..
         /// </summary>
@@ -266,37 +266,49 @@ namespace paroquiaRussas.Utility.Resources {
                 return ResourceManager.GetString("EXC23", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao salvar imagem..
         /// </summary>
-        public static string EXC24
-        {
-            get
-            {
-                return ResourceManager.GetString("EXC23", resourceCulture);
+        public static string EXC24 {
+            get {
+                return ResourceManager.GetString("EXC24", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Não foi possível carregar a lista de conteúdo. Tente novamente mais tarde..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possível carregar a lista de conteúdo. Tente novamente mais tarde..
         /// </summary>
-        public static string EXC25
-        {
-            get
-            {
+        public static string EXC25 {
+            get {
                 return ResourceManager.GetString("EXC25", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Ocorreu um erro ao carregar o evento..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro ao carregar o evento..
         /// </summary>
-        public static string EXC26
-        {
-            get
-            {
+        public static string EXC26 {
+            get {
                 return ResourceManager.GetString("EXC26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O token procurado não existe..
+        /// </summary>
+        public static string EXC27 {
+            get {
+                return ResourceManager.GetString("EXC27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a As claims para gerar o token estão nulas..
+        /// </summary>
+        public static string EXC28 {
+            get {
+                return ResourceManager.GetString("EXC28", resourceCulture);
             }
         }
     }

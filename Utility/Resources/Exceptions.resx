@@ -195,4 +195,10 @@
   <data name="EXC26" xml:space="preserve">
     <value>Ocorreu um erro ao carregar o evento.</value>
   </data>
+  <data name="EXC27" xml:space="preserve">
+    <value>O token procurado não existe.</value>
+  </data>
+  <data name="EXC28" xml:space="preserve">
+    <value>As claims para gerar o token estão nulas.</value>
+  </data>
 </root>
