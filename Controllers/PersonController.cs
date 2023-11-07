@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using paroquiaRussas.Filters;
 using paroquiaRussas.Models;
 using paroquiaRussas.Repository;
 using paroquiaRussas.Utility;
@@ -52,7 +53,7 @@ namespace paroquiaRussas.Controllers
             }
         }
 
-        [Authorize]
+        [ServiceFilter(typeof(AdminMethodsAuthorizationAttribute))]
         [HttpPost]
         public async Task<IActionResult> Addperson([FromForm] Person person)
         {

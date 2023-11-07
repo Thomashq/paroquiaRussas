@@ -104,8 +104,7 @@ body {
 }
 
     .link-news:hover {
-        text-decoration: underline;
-        color: var(--secundary-color);
+        transform: scale(1.03);
     }
 
 .card-news {

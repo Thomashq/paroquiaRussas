@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using paroquiaRussas.Utility;
-using paroquiaRussas.Utility.Interfaces;
 using paroquiaRussas.Utility.Resources;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -10,7 +8,7 @@ using System.Text;
 
 namespace paroquiaRussas.Services
 {
-    public class TokenServices : IToken
+    public class TokenServices
     {
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
