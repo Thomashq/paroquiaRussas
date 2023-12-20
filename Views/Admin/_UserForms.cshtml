@@ -1,0 +1,28 @@
+﻿@using static paroquiaRussas.Utility.Enum
+@model Person
+
+<div class="my-3 text-dark text-start">
+    <div class="container text-start alert alert-danger fixed-top w-50" id="error-message-div" style="display: none; margin: 0 auto; margin-top: 60px;">
+        <span id="error-message"></span>
+        <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+    </div>
+
+    <form class="row g-2 align-content-start personForms" asp-controller="Person" asp-action="Addperson" method="post">
+        <div class="form-floating col-lg-8 my-2">
+            <input type="text" class="form-control text-dark" id="userNameInput" placeholder="Thomas Henrique" asp-for="Username" required>
+            <label for="userNameInput" class="text-dark">Escreva o Nome do Usuário</label>
+        </div>
+        <div class="form-floating col-lg-4 my-2">
+            <select asp-for="Role" asp-items="Html.GetEnumSelectList<Role>()" class="form-select text-dark" required style="padding: 0px 12px;"></select>
+        </div>
+        <div class="form-floating col-lg-6 my-2">
+            <input type="password" class="form-control text-dark" id="pwdInput" asp-for="Pwd" required>
+            <label for="pwdInput" class="text-dark">Escreva a Senha</label>
+        </div>
+        <div class="form-floating col-lg-6 my-2">
+            <input type="password" class="form-control text-dark" id="pwdRepeatInput" required>
+            <label for="pwdRepeatInput" class="text-dark">Reescreva a Senha</label>
+        </div>
+        <button type="submit" asp-controller="Person" asp-action="Addperson" class="col-md-2 btn-style mt-4" style="border-radius: 5px; border: none; height: 40px;">Enviar</button>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+﻿@model News
+
+<div class="my-3 text-dark text-start">
+    <form class="row g-2 align-content-start" asp-controller="News" asp-action="CreateNewNews" method="post">
+        <div class="form-floating col-lg-12 my-2">
+            <input type="text" class="form-control text-dark" id="titleInput" placeholder="Encontro de Casais" asp-for="NewsTitle" required>
+            <label for="titleInput" class="text-dark">Escreva o Título da Notícia</label>
+        </div>
+        <div class="form-floating col-lg-12 my-2">
+            <input type="text" class="form-control text-dark" id="headlineInput" placeholder="Retiro Espiritual de Setembro" asp-for="Headline" required>
+            <label for="headlineInput" class="text-dark">Escreva a Manchete da Notícia</label>
+        </div>
+        <div class="form-floating col-lg-12 my-2">
+            <textarea class="form-control text-dark" id="contentInput" asp-for="NewsContent" required></textarea>
+            <label for="contentInput" class="text-dark">Escreva a Notícia</label>
+        </div>
+        <div class="">
+            <label for="formFileSm" class="form-label">Escolha Imagem da Notícia</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" required>
+            <input class="form-control form-control-sm" id="newsImageBase64" type="text" asp-for="NewsImage" hidden>
+        </div>
+
+        <button type="submit" asp-controller="News" asp-action="CreateNewNews" class="col-md-2 btn-style mt-4" style="border-radius: 5px; border: none; height: 40px;">Enviar</button>
+    </form>
+</div>

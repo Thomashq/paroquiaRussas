@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Liturgia";
+}
+@model LiturgyModel
+
+<div class="text-center gap-top mt-4 container" style="margin-bottom: 80px;">
+    <h2 class="text-dark fw-bold-700 text-start title-container">Liturgia</h2>
+
+    <div class="card mt-3 text-start text-dark">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                @{
+                    string col = "col-md-4";
+
+                    if (Model.segundaLeituraDomingo != null)
+                        col = "col-md-3";
+
+                    <li class="nav-item @col col-6" style="cursor: pointer">
+                        <a class="nav-link nav-cards active fs-5" data-nav="leitura">1ª Leitura</a>
+                    </li>
+
+                    if (Model.segundaLeituraDomingo != null)
+                    {
+                        <li class="nav-item @col col-6" style="cursor: pointer">
+                            <a class="nav-link nav-cards fs-5" data-nav="segunda">2ª Leitura</a>
+                        </li>
+                    }
+
+                    <li class="nav-item @col col-6" style="cursor: pointer">
+                        <a class="nav-link nav-cards fs-5" data-nav="salmo">Salmo</a>
+                    </li>
+                    <li class="nav-item @col col-6" style="cursor: pointer">
+                        <a class="nav-link nav-cards fs-5" data-nav="evangelho">Evangelho</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="my-2 container">
+            @{
+                string colorBook = "#999999";
+
+                switch (@Model.cor.ToUpper())
+                {
+                    case "VERMELHO":
+                        colorBook = "#ff0000";
+                        break;
+                    case "ROXO":
+                        colorBook = "#800080";
+                        break;
+                    case "ROSA":
+                        colorBook = "#ff00ff";
+                        break;
+                    case "PRETO":
+                        colorBook = "#000";
+                        break;
+                    case "VERDE":
+                        colorBook = "#008000";
+                        break;
+                    default:
+                        break;
+                }
+
+                <p class="my-0"><small>@DateTime.Now.ToString("dd/MM/yyyy")</small></p>
+                <p class="my-0"><small>COR LITÚRGICA: @Model.cor.ToUpper() <i class="bi bi-book-fill" style="color: @colorBook; margin-left: 5px;"></i></small></p>
+                <h4>@Model.liturgia</h4>
+                <hr />
+            }
+        </div>
+
+        <div class="card-body conteudo-leitura">
+            <p class="card-title">Primeira Leitura (@Model.primeiraLeitura.referencia)</p>
+            <h5 class="card-text">@Model.primeiraLeitura.titulo</h5>
+            <p class="fs-6 lh-lg container" style="text-align: justify">@Html.Raw(@Model.primeiraLeitura.texto)</p>
+
+            <p class="fs-6 lh-lg container" style="text-align: justify">— Palavra do Senhor.</p>
+            <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Graças a Deus</strong>.</p>
+        </div>
+
+        @{
+            if (Model.segundaLeituraDomingo != null)
+            {
+                <div class="card-body conteudo-segunda" style="display: none;">
+                    <p class="card-title">Segunda Leitura (@Model.segundaLeituraDomingo.referencia)</p>
+                    <h5 class="card-text">@Model.segundaLeituraDomingo.titulo</h5>
+                    <p class="fs-6 lh-lg container" style="text-align: justify">@Html.Raw(@Model.segundaLeituraDomingo.texto)</p>
+
+                    <p class="fs-6 lh-lg container" style="text-align: justify">— Palavra do Senhor.</p>
+                    <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Graças a Deus</strong>.</p>
+                </div>
+            }
+        }
+
+        <div class="card-body conteudo-salmo" style="display: none;">
+            <p class="card-title">Responsório (@Model.salmo.referencia)</p>
+            <h5 class="card-text">— @Model.salmo.refrao</h5>
+            <p class="fs-6 lh-lg container" style="text-align: justify">— @Model.salmo.refrao</p>
+            <p class="fs-6 lh-lg container" style="text-align: justify">@Html.Raw(@Model.salmo.texto)</p>
+        </div>
+
+        <div class="card-body conteudo-evangelho" style="display: none;">
+            <p class="card-title">Evangelho (@Model.evangelho.referencia)</p>
+            <h5 class="card-text">@Model.evangelho.titulo</h5>
+            <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Glória a vós, Senhor</strong>.</p>
+            <p class="fs-6 lh-lg container" style="text-align: justify">@Html.Raw(@Model.evangelho.texto)</p>
+
+            <p class="fs-6 lh-lg container" style="text-align: justify">— Palavra da Salvação.</p>
+            <p class="fs-6 lh-lg container" style="text-align: justify">— <strong>Glória a vós, Senhor</strong>.</p>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("_FooterLayout")

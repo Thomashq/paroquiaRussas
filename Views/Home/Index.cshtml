@@ -1,8 +1,127 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using System.Globalization
+@{
+    ViewData["Title"] = "Início";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@model HomeModel
+
+<div class="vh-100">
+    <div class="vh-100">
+        <div id="mainSlider" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#mainSlider" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#mainSlider" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#mainSlider" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active vh-100">
+                    <img src="~/img/bible-g38657752f_1920.jpg" class="d-block w-100 vh-100" style="object-fit: cover" />
+                </div>
+                <div class="carousel-item vh-100">
+                    <img src="~/img/card.jpeg" class="d-block w-100 vh-100" style="object-fit: cover" />
+                </div>
+                <div class="carousel-item vh-100">
+                    <img src="~/img/festa das inscrições slide3.jpeg" class="d-block w-100 vh-100" style="object-fit: cover" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="pt-5 container">
+        <div class="container">
+            <div class="row justify-content-around align-items-center">
+                <article class="col-lg-6 col-md-12">
+                    <h2 class="text-left text-dark fw-bold-700">Comunidade de comunidades</h2>
+                    <p class="text-left text-dark">
+                        Somos uma Paróquia de comunidades, que há 287 anos busca viver o que
+                        está nas palavras e obras de Cristo, e essa vivência transparece
+                        nossa origem. Somos comunidades de comunidade que evangeliza e
+                        testemunha à alegria do Evangelho, tendo um olhar cuidadoso para a
+                        propagação da dimensão da fé e da esperança, lançando sempre um
+                        olhar atento na defesa da vida e não sendo indiferente a tudo aquilo
+                        que gera a morte.
+                    </p>
+                    <div class="column align-items-center footer-icons-div pb-5">
+                        <a href="https://www.facebook.com/people/Par%C3%B3quia-de-Russas/100063692673100/" target="_blank"><i class="bi bi-facebook color-icon fs-3"></i></a>
+                        <a href="https://www.instagram.com/paroquiaderussas/" target="_blank" class="px-2"><i class="bi bi-instagram color-icon fs-3"></i></a>
+                        <a href="https://www.youtube.com/c/Par%C3%B3quiadeRussas" target="_blank"><i class="bi bi-youtube color-icon fs-3"></i></a>
+                    </div>
+                </article>
+                <div class="col-lg-6 col-md-12 row align-items-center justify-content-center">
+                    <img src="~/img/horacio.jpg" style="width: 30rem; height: 20rem; border-radius: 25px; object-fit: cover" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gap-top container">
+        <div>
+            <h2 class="text-dark fw-bold-700 title-container">Notícias</h2>
+        </div>
+        <div class="pt-3 pb-5 row g-3">
+            @{
+                if (Model.News.Count == 0)
+                {
+                    <p class="text-dark">Por enquanto ainda não há notícias registradas.</p>
+                }
+                else
+                {
+                    foreach (News newsCard in Model.News)
+                    {
+                        <div class="card card-news col-lg-4 link-news" data-target="#modal-@newsCard.Id" data-id="@newsCard.Id">
+                            <img class="card-img-top" src="@newsCard.NewsImage" alt="@newsCard.Headline" style="height: 15rem; object-fit: fill">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark">
+                                    <a>@newsCard.NewsTitle</a>
+                                </h5>
+                                <p class="card-text text-dark">@newsCard.Headline</p>
+                                <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @newsCard.CreationDate.ToString("dd/MM/yyyy")</small></p>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+
+            @await Html.PartialAsync("~/Views/News/_ModalNews.cshtml")
+        </div>
+        <button type="button" class="btn btn-style"><a asp-controller="News" asp-action="Index">Mais Notícias</a></button>
+    </section>
+
+    <section class="gap-top container">
+        <div>
+            <h2 class="text-dark fw-bold-700 title-container">Eventos</h2>
+        </div>
+        <div class="pt-3 pb-5">
+            @{
+                if (Model.Events.Count == 0)
+                {
+                    <p class="text-dark">Por enquanto ainda não há eventos registrados.</p>
+                }
+                else
+                {
+                    foreach (Event eventcard in Model.Events)
+                    {
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="@eventcard.EventImage" class="img-fluid rounded-start  w-100" alt="@eventcard.EventName" style="height: 14rem; object-fit: cover" />
+                                </div>
+                                <div class="col-md-8 card-text-box">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-dark">@eventcard.EventName</h3>
+                                        <p class="card-text text-dark">@eventcard.EventDescription</p>
+                                        <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @eventcard.EventDate às @eventcard.EventTime</small></p>
+                                        <p class="card-text"><small class="text-dark"><i class="bi bi-geo-alt text-dark"></i> @eventcard.EventAddress</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+            <button type="button" class="btn btn-style"><a asp-controller="Events" asp-action="Index">Mais Eventos</a></button>
+        </div>
+    </section>
+
+    @await Html.PartialAsync("_FooterLayout")
 </div>

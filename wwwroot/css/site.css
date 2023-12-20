@@ -1,22 +1,197 @@
-html {
-  font-size: 14px;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
+@import url("footer.css");
+
+:root {
+    --primary-color: #9c4521;
+    --secundary-color: #ab6c29;
+    --footer-color: #4a5562;
+    --white-color: #fafbfc;
+    --gray-low-color: #f8f8f8;
+    --translucid: rgba(255, 255, 255, 0.805);
+    --hover-color: #ffdc9b;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/*SOBREPOSIÇÃO BOOTSTRAP*/
 body {
-  margin-bottom: 60px;
+    font-family: "Poppins", sans-serif;
+    background: var(--gray-low-color);
+    height: 100vh;
+}
+
+.body-admin {
+    background: var(--primary-color);
+}
+
+.fw-bold {
+    font-weight: 500 !important;
+}
+
+.fw-bold-700 {
+    font-weight: 700 !important;
+}
+
+.title-container::after {
+    content: "";
+    position: absolute;
+    background: var(--primary-color);
+    height: 0.1rem;
+    margin: 1.3rem 1rem;
+    width: 75%;
+}
+
+.bg-secondary, .btn-secondary {
+    background-color: var(--secundary-color) !important;
+}
+
+.text-dark, .color-icon {
+    color: var(--primary-color) !important;
+}
+
+.min-height-96px {
+    min-height: 96px;
+}
+
+.nav-link:hover, .color-icon:hover {
+    color: var(--secundary-color) !important;
+}
+
+.footer-menu li a {
+    height: 40px;
+}
+
+.footer-icons-div {
+    margin-bottom: -25px !important;
+}
+
+.gap-top {
+    padding-top: 7rem;
+}
+
+.navbar-toggler {
+    background: var(--secundary-color);
+}
+
+.card-text-box {
+    border-right: 1rem solid var(--primary-color);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0.01rem 0rem 0.1rem var(--primary-color);
+}
+
+.btn-style {
+    background: var(--primary-color);
+    color: white;
+}
+
+    .btn-style:hover {
+        background: var(--secundary-color);
+        color: white;
+    }
+
+    .btn-style a {
+        color: white;
+        text-decoration: none;
+    }
+
+.footer-menu-style {
+    margin-top: 50px;
+}
+
+.link-news {
+    cursor: pointer;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+    .link-news:hover {
+        transform: scale(1.03);
+    }
+
+.card-news {
+    border-right: 10px solid var(--gray-low-color);
+}
+
+.talk-to-us {
+    color: white !important;
+}
+
+.card-header {
+    background-color: var(--white-color) !important;
+}
+
+.nav-cards {
+    color: var(--primary-color) !important;
+}
+
+    .nav-cards.active {
+        background-color: var(--secundary-color) !important;
+        color: white !important;
+    }
+
+        .nav-cards.active:hover {
+            color: var(--white-color) !important;
+        }
+
+sup {
+    font-weight: bold;
+}
+
+.gradient-custom-2 {
+    background: linear-gradient(45deg, var(--primary-color), var(--secundary-color), var(--primary-color));
+    background-size: 200% 200%;
+}
+
+@media (max-width: 992px) {
+    .title-container::after {
+        margin: 1rem 1rem;
+        width: 65%;
+    }
+}
+
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-text-box {
+        border-bottom: 0.5rem solid var(--primary-color);
+        border-right: none;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    .footer-menu-style {
+        margin-top: 450px;
+    }
+
+    .title-container::after {
+        width: 58%;
+    }
+
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+
+@media (min-width: 576px) {
+    .container-fluid {
+        width: 100vw !important;
+        display: flex !important;
+        justify-content: space-between !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .w-sm-100 {
+        width: 100%
+    }
+}
+
+@media (max-width: 300px) {
+    .footer-menu-navbar {
+        display: none !important;
+    }
 }

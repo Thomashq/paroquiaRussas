@@ -1,0 +1,38 @@
+﻿@model Mail
+
+<div class="mt-5 text-dark text-start">
+    @if (TempData["SucessMessage"] != null)
+    {
+        <div class="alert alert-success text-start" role="alert">
+            @TempData["SucessMessage"]
+            <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger text-start" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+        </div>
+    }
+
+    <h5>
+        Envie-nos uma mensagem!
+    </h5>
+    <form class="row g-2 align-content-start" asp-controller="Contact" asp-action="SendMail" method="post">
+        <div class="form-floating col-lg-6">
+            <input type="text" class="form-control text-dark" id="nameInput" placeholder="Paulo Guilherme" asp-for="MailSubject" required>
+            <label for="nameInput" class="text-dark">Digite seu nome</label>
+        </div>
+        <div class="form-floating col-lg-6">
+            <input type="email" class="form-control text-dark" id="mailInput" placeholder="paulo@gmail.com" asp-for="MailContact" required>
+            <label for="mailInput" class="text-dark">Digite seu e-mail</label>
+        </div>
+        <div class="form-floating col-lg-12">
+            <textarea class="form-control text-dark" id="textareaInput" placeholder="Adorei a liturgia!" asp-for="MailContent" required></textarea>
+            <label for="textareaInput" class="text-dark">Deixe uma mensagem</label>
+        </div>
+        <button type="submit" class="col-md-1 btn-style" style="border-radius: 5px; border: none; height: 40px;" asp-controller="Contact" asp-action="SendMail">Enviar</button>
+    </form>
+</div>

@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Área Administrativa";
+    Layout = null;
+    @model AdminModel
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Paróquia Russas</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/paroquiaRussas.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body class="body-admin h-100">
+    <section class="my-5">
+        <div class="text-center">
+            <img src="~/img/logoparoquia.png" alt="logotipo paróquia de russas" style="width: 20rem" />
+        </div>
+        <div class="text-center mt-4 container">
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger text-start" role="alert">
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+                </div>
+            }
+
+            @if (TempData["SucessMessage"] != null)
+            {
+                <div class="alert alert-success text-start" role="alert">
+                    @TempData["SucessMessage"]
+                    <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+                </div>
+            }
+
+            <div class="container text-start alert alert-danger fixed-top w-50" id="error-message-div" style="display: none; margin: 0 auto; margin-top: 60px;">
+                <span id="error-message"></span>
+                <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+            </div>
+
+            <div class="container text-start alert alert-success fixed-top w-50" id="success-message-div" style="display: none; margin: 0 auto; margin-top: 60px;">
+                <span id="success-message"></span>
+                <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+            </div>
+
+            <div class="card mt-3 text-start text-dark">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-admin-page active text-dark" data-nav-page="editar" aria-current="true" href="#">Editar Conteúdo</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark nav-link-admin-page" data-nav-page="criar" aria-current="true" href="#">Criar Conteúdo</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-header pagina-admin-editar">
+                        <div>
+                            @await Html.PartialAsync("_MenuFormsAdmin")
+                            <hr/>
+                        </div>
+
+                        <div class="card-body conteudo-noticias">
+                            @await Html.PartialAsync("_NewsListEdit", Model)
+                        </div>
+
+                        <div class="card-body conteudo-eventos" style="display: none;">
+                            @await Html.PartialAsync("_EventsListEdit", Model)
+                        </div>
+
+                        <div class="card-body conteudo-usuarios" style="display: none;">
+                            @await Html.PartialAsync("_UserListEdit", Model)
+                        </div>
+                    </div>
+
+                    <div class="card-header pagina-admin-criar" style="display: none;">
+                        <div>
+                            @await Html.PartialAsync("_MenuFormsAdmin")
+                            <hr/>
+                        </div>
+
+                        <div class="card-body conteudo-noticias">
+                            @await Html.PartialAsync("_NewsForms", Model.News)
+                        </div>
+
+                        <div class="card-body conteudo-eventos" style="display: none;">
+                            @await Html.PartialAsync("_EventsForms", Model.Event)
+                        </div>
+
+                        <div class="card-body conteudo-usuarios" style="display: none;">
+                            @await Html.PartialAsync("_UserForms", Model.Person)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/js/utility.js" asp-append-version="true"></script>
+    <script src="~/js/admin.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</body>
+</html>

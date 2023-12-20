@@ -1,0 +1,35 @@
+﻿@model List<News>
+
+<div class="container text-start alert alert-danger fixed-top w-50" id="error-message-div" style="display: none; margin: 0 auto; margin-top: 60px;">
+    <span id="error-message"></span>
+    <button type="button" class="btn btn-danger btn-sm close-alert position-absolute" style="right: 20px" aria-label="Close">X</button>
+</div>
+
+<div class="pt-3 pb-5 row g-3">
+    @{
+        if (Model.Count == 0)
+        {
+            <p class="text-dark">Por enquanto ainda não há notícias registradas.</p>
+        }
+        else
+        {
+            <p id="nenhuma-noticia-encontrada" class="text-dark" style="display: none;">Nenhuma notícia foi encontrado.</p>
+
+            foreach (News newsCard in Model)
+            {
+                <div data-target="#modal-@newsCard.Id" data-id="@newsCard.Id" class="link-news card card-news text-start col-md-6 col-lg-4 noticia">
+                    <img class="card-img-top" src="@newsCard.NewsImage" alt="@newsCard.Headline" style="height: 15rem; object-fit: fill">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">
+                            <a>@newsCard.NewsTitle</a>
+                        </h5>
+                        <p class="card-text text-dark">@newsCard.Headline</p>
+                        <p class="card-text"><small class="text-dark"><i class="bi bi-calendar text-dark"></i> @newsCard.CreationDate.ToString("dd/MM/yyyy")</small></p>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+
+@await Html.PartialAsync("_ModalNews")

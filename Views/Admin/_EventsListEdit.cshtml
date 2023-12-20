@@ -1,0 +1,41 @@
+﻿@model AdminModel
+
+<table class="table call-data-table" id="event-table">
+    <thead>
+        <tr>
+            <th scope="col" class="text-dark">Evento</th>
+            <th scope="col" class="text-dark">Data do Evento</th>
+            <th scope="col" class="text-dark  text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model == null)
+            {
+                <tr>
+                    <td colspan="4">
+                        <strong>Por enquanto ainda não há eventos registrados.</strong>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (Event events in Model.EventList)
+                {
+                    <tr>
+                        <td class="text-start">@events.EventName</td>
+                        <td class="text-start">@events.EventDate</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-primary events-edit" data-id=@events.Id>Editar</a>
+                                <a role="button" class="btn btn-danger events-delete" data-id=@events.Id>Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+@await Html.PartialAsync("_EventsFormsModal", Model.Event);

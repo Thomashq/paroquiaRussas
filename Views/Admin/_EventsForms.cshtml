@@ -1,0 +1,33 @@
+﻿@model Event
+
+<div class="my-3 text-dark text-start">
+    <form class="row g-2 align-content-start" asp-controller="Events" asp-action="AddEvent" method="post">
+        <div class="form-floating col-lg-12 my-2">
+            <input type="text" class="form-control text-dark" id="nameInput" placeholder="Encontro de Casais" asp-for="EventName" required>
+            <label for="nameInput" class="text-dark">Escreva o Nome do Evento</label>
+        </div>
+        <div class="form-floating col-lg-12 my-2">
+            <textarea class="form-control text-dark" id="descriptionInput" asp-for="EventDescription" required></textarea>
+            <label for="descriptionInput" class="text-dark">Escreva a Descrição do Evento</label>
+        </div>
+        <div class="form-floating col-lg-12 my-2">
+            <input type="text" class="form-control text-dark" id="addressInput" placeholder="Av. Dom Lino, 923-981 - Centro, Russas - CE, 62900-000" asp-for="EventAddress" required>
+            <label for="addressInput" class="text-dark">Escreva o Endereço do Evento</label>
+        </div>
+        <div class="form-floating col-lg-6 my-2">
+            <input type="date" class="form-control text-dark" id="dateInput" asp-for="EventDate" required>
+            <label for="dateInput" class="text-dark">Data do Evento</label>
+        </div>
+        <div class="form-floating col-lg-6 my-2">
+            <input type="time" class="form-control text-dark" id="timeInput" asp-for="EventTime" required>
+            <label for="timeInput" class="text-dark">Horário do Evento</label>
+        </div>
+        <div class="">
+            <label for="formFileSm" class="form-label">Escolha Imagem do Evento</label>
+            <input class="form-control form-control-sm" id="formEventsFileSm" type="file" required>
+            <input class="form-control form-control-sm" id="eventsImageBase64" type="text" asp-for="EventImage" hidden>
+        </div>
+
+        <button type="submit" asp-controller="Events" asp-action="AddEvent" class="col-md-2 btn-style mt-4" style="border-radius: 5px; border: none; height: 40px;">Enviar</button>
+    </form>
+</div>
