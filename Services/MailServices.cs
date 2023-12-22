@@ -26,7 +26,7 @@ namespace paroquiaRussas.Services
                     UserName = _configuration.GetValue<string>("MailApiConfig:UserName"),
                     Password = _configuration.GetValue<string>("MailApiConfig:Password"),
                     Port = _configuration.GetValue<int>("MailApiConfig:Port"),
-                    MailFrom = _configuration.GetValue<string>("MailApiConfig:MailFrom"),
+                    MailFrom = _configuration.GetValue<string>("MailApiConfig:UserName"),
                     MailTo = _configuration.GetValue<string>("MailApiConfig:MailTo")
                 };
 
@@ -35,9 +35,11 @@ namespace paroquiaRussas.Services
                     From = new MailAddress(mailApi.UserName, mailApi.Name)
                 };
 
+                string mailBody = $"{mail.MailContent}\n\nInformações de Contato:\n{mail.MailContact}";
+
                 mailMessage.To.Add(mailApi.MailTo);
                 mailMessage.Subject = mail.MailSubject;
-                mailMessage.Body = mail.MailContent;
+                mailMessage.Body = mailBody;
                 mailMessage.IsBodyHtml = true;
                 mailMessage.Priority = MailPriority.High;
 

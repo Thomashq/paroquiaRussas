@@ -59,9 +59,10 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+var connectionString = builder.Configuration.GetConnectionString("conn");
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("conn"));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
 var app = builder.Build();
